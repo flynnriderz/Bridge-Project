@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_dashboard/src/commons/theme.dart';
@@ -5,12 +7,19 @@ import 'package:flutter_web_dashboard/src/widget/card_tile.dart';
 import 'package:flutter_web_dashboard/src/widget/chart_card_tile.dart';
 import 'package:flutter_web_dashboard/src/widget/comment_widget.dart';
 import 'package:flutter_web_dashboard/src/widget/profile_Widget.dart';
-import 'package:flutter_web_dashboard/src/widget/project_widget.dart';
+import 'package:flutter_web_dashboard/src/widget/score_widget.dart';
 import 'package:flutter_web_dashboard/src/widget/quick_contact.dart';
 import 'package:flutter_web_dashboard/src/widget/responsive_widget.dart';
+import 'package:flutter_web_dashboard/src/widget/score_widget.dart';
 import 'package:flutter_web_dashboard/src/widget/sidebar_menu..dart';
 
 class MainPage extends StatelessWidget {
+  int state=1;
+  void chagestate(){
+    
+  }
+  
+  
   @override
   Widget build(BuildContext context) {
     final _media = MediaQuery.of(context).size;
@@ -107,7 +116,7 @@ class MainPage extends StatelessWidget {
                                             shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(20),
                                             ),
-                                            onPressed: () => print('follow'),
+                                            onPressed: () => state=1,
                                             child: Text(
                                               '   Detail   ',
                                               style: TextStyle(
@@ -122,7 +131,7 @@ class MainPage extends StatelessWidget {
                                             shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(20),
                                             ),
-                                            onPressed: () => print('follow'),
+                                            onPressed: () => print("sdasd"),
                                             child: Text(
                                               '   Score    ',
                                               style: TextStyle(
@@ -213,7 +222,10 @@ class MainPage extends StatelessWidget {
                                             SizedBox(
                                               width: 20,
                                             ),
-                                            ProjectWidget(media: _media),
+                                            if(state==0)                                
+                                              ScoreWidget(media: _media)
+                                              else if(state==1)
+                                              ProfileWidget(media: _media)
                                           ],
                                         ),
                                       ),

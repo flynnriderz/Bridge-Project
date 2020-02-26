@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_dashboard/src/commons/theme.dart';
 import 'package:flutter_web_dashboard/src/model/project_model.dart';
 
-class ProjectWidget extends StatelessWidget {
-  const ProjectWidget({
+class ScoreWidget extends StatelessWidget {
+  const ScoreWidget({
     Key key,
     @required Size media,
   })  : _media = media,
@@ -32,7 +32,7 @@ class ProjectWidget extends StatelessWidget {
                   top: 10,
                   left: 20,
                   child: Text(
-                    'Projects of the Month',
+                    'Score',
                     style: cardTitleTextStyle,
                   ),
                 ),
@@ -46,19 +46,39 @@ class ProjectWidget extends StatelessWidget {
                         children: <Widget>[
                           SizedBox(width: 2),
                           Text(
-                            'Assigned',
+                            'Table',
                             style: TextStyle(color: Colors.grey),
                           ),
                           Text(
-                            'Name',
+                            'Round',
                             style: TextStyle(color: Colors.grey),
                           ),
                           Text(
-                            'Priority',
+                            'Board',
                             style: TextStyle(color: Colors.grey),
                           ),
                           Text(
-                            'Budget',
+                            'Declarer',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          Text(
+                            'Trump',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          Text(
+                            'Double',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          Text(
+                            'Re-Double',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          Text(
+                            'Score',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          Text(
+                            'Result',
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
