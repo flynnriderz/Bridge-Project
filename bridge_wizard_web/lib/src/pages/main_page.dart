@@ -15,6 +15,7 @@ import 'package:flutter_web_dashboard/src/widget/responsive_widget.dart';
 import 'package:flutter_web_dashboard/src/widget/score_widget.dart';
 import 'package:flutter_web_dashboard/src/widget/sidebar_menu..dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_web_dashboard/src/widget/section.dart';
 
 
 
@@ -138,7 +139,7 @@ class MainPage extends StatelessWidget {
                                               borderRadius: BorderRadius.circular(20),
                                             ),
                                             onPressed: () => Navigator.push(context, MaterialPageRoute(
-                                              builder: (context)=> ScoreWidget(media: _media))),
+                                              builder: (context)=> TabsNonScrollableDemo())),
                                             child: Text(
                                               '   Score    ',
                                               style: TextStyle(
