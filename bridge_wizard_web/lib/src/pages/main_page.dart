@@ -1,5 +1,7 @@
 import 'dart:html';
 
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_dashboard/src/commons/theme.dart';
@@ -12,9 +14,13 @@ import 'package:flutter_web_dashboard/src/widget/quick_contact.dart';
 import 'package:flutter_web_dashboard/src/widget/responsive_widget.dart';
 import 'package:flutter_web_dashboard/src/widget/score_widget.dart';
 import 'package:flutter_web_dashboard/src/widget/sidebar_menu..dart';
+import 'package:url_launcher/url_launcher.dart';
+
+
+
 
 class MainPage extends StatelessWidget {
-  int state=1;
+  int state=0;
   void chagestate(){
     
   }
@@ -131,7 +137,8 @@ class MainPage extends StatelessWidget {
                                             shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(20),
                                             ),
-                                            onPressed: () => print("sdasd"),
+                                            onPressed: () => Navigator.push(context, MaterialPageRoute(
+                                              builder: (context)=> ScoreWidget(media: _media))),
                                             child: Text(
                                               '   Score    ',
                                               style: TextStyle(
@@ -269,3 +276,4 @@ class MainPage extends StatelessWidget {
     );
   }
 }
+
