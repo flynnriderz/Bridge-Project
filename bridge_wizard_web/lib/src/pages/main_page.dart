@@ -1,7 +1,6 @@
 import 'dart:html';
 
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_dashboard/src/commons/theme.dart';
@@ -202,31 +201,6 @@ class MainPage extends StatelessWidget {
                                       IntrinsicHeight(
                                         child: Row(
                                           children: <Widget>[
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              // children: <Widget>[
-                                              //   ChartCardTile(
-                                              //     cardColor: Color(0xFF7560ED),
-                                              //     cardTitle: 'Bandwidth usage',
-                                              //     subText: 'March 2017',
-                                              //     icon: Icons.pie_chart,
-                                              //     typeText: '50 GB',
-                                              //   ),
-                                              //   SizedBox(
-                                              //     height: 20,
-                                              //   ),
-                                              //   ChartCardTile(
-                                              //     cardColor: Color(0xFF25C6DA),
-                                              //     cardTitle: 'Download count',
-                                              //     subText: 'March 2017',
-                                              //     icon: Icons.cloud_upload,
-                                              //     typeText: '35487',
-                                              //   ),
-                                              // ],
-                                            ),
                                             SizedBox(
                                               width: 20,
                                             ),
@@ -249,20 +223,20 @@ class MainPage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            // IntrinsicHeight(
-                            //   child: Row(
-                            //     crossAxisAlignment: CrossAxisAlignment.stretch,
-                            //     mainAxisAlignment: MainAxisAlignment.start,
-                            //     children: <Widget>[
-                            //       CommentWidget(media: _media),
-                            //       SizedBox(
-                            //         width: 20,
-                            //       ),
-                            //       ProfileWidget(media: _media),
-                            //     ],
-                            //   ),
-                            // ),
-                            // SizedBox(height: 20),
+                            IntrinsicHeight(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  CommentWidget(media: _media),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  ProfileWidget(media: _media),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 20),
                           ],
                         ),
                       ),

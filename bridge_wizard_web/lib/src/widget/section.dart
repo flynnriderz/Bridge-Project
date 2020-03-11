@@ -3,10 +3,13 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_web_dashboard/src/widget/profile_Widget.dart';
+import 'package:flutter_web_dashboard/src/widget/score_widget.dart';
 
 class TabsNonScrollableDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _media = MediaQuery.of(context).size;
     List<String> tabs = [
       'Detail','Score','Player list','Result'
     ];
@@ -27,10 +30,10 @@ class TabsNonScrollableDemo extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            for (final tab in tabs)
-              Center(
-                child: Text(tab),
-              ),
+            ProfileWidget(media: _media),
+            ScoreWidget(media: _media,),
+            ProfileWidget(media: _media),
+            ScoreWidget(media: _media,),
           ],
         ),
       ),
