@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_dashboard/src/commons/theme.dart';
 import 'package:flutter_web_dashboard/src/model/menu.dart';
+import 'package:flutter_web_dashboard/src/pages/main_page.dart';
 import 'package:flutter_web_dashboard/src/widget/menu_item_tile.dart';
+import 'package:flutter_web_dashboard/src/widget/create_tournament.dart';
+
 
 class SideBarMenu extends StatefulWidget {
   @override
   _SideBarMenuState createState() => _SideBarMenuState();
 }
-
+int selectedIndex = 0;
 class _SideBarMenuState extends State<SideBarMenu>
     with SingleTickerProviderStateMixin {
-  double maxWidth = 250;
+  double maxWidth = 260;
   double minWidgth = 70;
   bool collapsed = false;
-  int selectedIndex = 0;
+  
 
   AnimationController _animationController;
   Animation<double> _animation;
@@ -67,6 +70,30 @@ class _SideBarMenuState extends State<SideBarMenu>
                         setState(() {
                           selectedIndex = index;
                         });
+                        Navigator.push(context, MaterialPageRoute(
+                                              builder: (context)=> MainPage()));
+                      },
+                    );
+                  },
+                ),
+                
+              ),
+              Expanded(
+                child: ListView.separated(
+                  separatorBuilder: (context, counter) {
+                    return Divider(
+                      height: 2,
+                    );
+                  },
+                  itemCount: 1,
+                  itemBuilder: (BuildContext context, int index) {
+                    return MenuItemTile(
+                      title: 'Create Tournament',
+                      icon:  Icons.create_new_folder,
+                      animationController: _animationController,
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                                              builder: (context)=> CreateTournament()));
                       },
                     );
                   },
@@ -90,9 +117,12 @@ class _SideBarMenuState extends State<SideBarMenu>
               ),
               SizedBox(
                 height: 20,
-              )
+              ),
+              
             ],
+            
           ),
+          
         );
       },
     );

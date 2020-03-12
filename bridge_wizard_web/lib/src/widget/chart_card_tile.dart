@@ -35,7 +35,7 @@ class ChartCardTile extends StatelessWidget {
               color: cardColor,
             ),
             height: _media.height / 4,
-            width: _media.width / 4,
+            width: _media.width /2+300,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
