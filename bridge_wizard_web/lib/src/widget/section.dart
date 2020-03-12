@@ -3,8 +3,14 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_web_dashboard/src/model/menu.dart';
+import 'package:flutter_web_dashboard/src/widget/sidebar_menu..dart';
+class TabsNonScrollableDemo extends StatefulWidget {
+  @override
+  _TabsNonScrollableDemo createState() => _TabsNonScrollableDemo();
+}
+class _TabsNonScrollableDemo extends State<TabsNonScrollableDemo>{
 
-class TabsNonScrollableDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> tabs = [
@@ -17,7 +23,7 @@ class TabsNonScrollableDemo extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title:
-              Text('GalleryLocalizations.of(context).demoTabsNonScrollingTitle'),
+              Text(menuItems[selectedIndex].section.title),
           bottom: TabBar(
             isScrollable: false,
             tabs: [

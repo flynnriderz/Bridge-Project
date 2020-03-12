@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';    
 import 'package:flutter_form_builder/flutter_form_builder.dart';    
 import 'package:flutter_web_dashboard/src/model/menu.dart';
+import 'package:flutter_web_dashboard/src/model/section.dart';
 import 'package:flutter_web_dashboard/src/widget/sidebar_menu..dart';
 
 class CreateTournament extends StatefulWidget {    
@@ -61,8 +62,10 @@ class _CreateTournament extends State<CreateTournament> {
                       menuItems.addAll([
                       Menu(title: _fbKey.currentState.value.values.toList()[2], 
                       icon: Icons.dashboard,
-                      location: _fbKey.currentState.value.values.toList()[3]),
+                      location: _fbKey.currentState.value.values.toList()[3],
+                      section: sections[0]),
                       ]);
+                      Navigator.pop(context);
                      }    
                    },    
                  ),    

@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_dashboard/src/commons/theme.dart';
 import 'package:flutter_web_dashboard/src/model/menu.dart';
+import 'package:flutter_web_dashboard/src/model/section.dart';
 import 'package:flutter_web_dashboard/src/widget/card_tile.dart';
 import 'package:flutter_web_dashboard/src/widget/chart_card_tile.dart';
 import 'package:flutter_web_dashboard/src/widget/comment_widget.dart';
@@ -91,6 +92,7 @@ class _MainPage extends State<MainPage> {
                                                 ),
                                               ],
                                             ),
+                                            
                                             SizedBox(
                                               height: 20,
                                             ),
@@ -107,6 +109,44 @@ class _MainPage extends State<MainPage> {
                                     width: 10,
                                   ),
                                   // QuickContact(media: _media)
+                                ],
+                              ),
+                            ),
+
+
+                            IntrinsicHeight(
+                                child: DataTable(
+                                sortAscending: true,
+                                sortColumnIndex: 0,
+                                columns: [
+                                  DataColumn(
+                                      label: Text(
+                                        "Section",
+                                        style: TextStyle(
+                                            fontSize: 20, fontWeight: FontWeight.w900),
+                                      ),
+                                      tooltip: "Student USN Number"),
+                                  DataColumn(
+                                      label: Text(
+                                    "Type",
+                                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                                  )),
+                                ],
+                                rows: [
+                                  DataRow(
+                                    cells: [
+                                      DataCell(Text(menuItems[selectedIndex].section.title), showEditIcon: true),
+                                      DataCell(Text(menuItems[selectedIndex].section.type)),
+                                    ],
+                                    selected: false,
+                                     onSelectChanged: (bool selected) {
+                                      if (selected) {
+                                          Navigator.push(context, MaterialPageRoute(
+                                              builder: (context)=> TabsNonScrollableDemo()));
+                                      }
+                                  },
+                                  ),
+                                  
                                 ],
                               ),
                             ),
