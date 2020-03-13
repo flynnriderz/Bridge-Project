@@ -1,7 +1,6 @@
 import 'dart:html';
 
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_dashboard/src/commons/theme.dart';
@@ -99,7 +98,115 @@ class _MainPage extends State<MainPage> {
                                           ],
                                         ),
                                       ),
+<<<<<<< HEAD
                                       
+=======
+                                      SizedBox(
+                                              height: 20,
+                                            ),
+                                      IntrinsicHeight(
+                                        
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: <Widget>[
+                                            RaisedButton(
+                                            color: Color(0xff7560ED),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            onPressed: () => state=1,
+                                            child: Text(
+                                              '   Detail   ',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 30,
+                                              ),
+                                            ),
+                                          ),
+                                            SizedBox(width: 20),
+                                            RaisedButton(
+                                            color: Color(0xff7560ED),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            onPressed: () => Navigator.push(context, MaterialPageRoute(
+                                              builder: (context)=> TabsNonScrollableDemo())),
+                                            child: Text(
+                                              '   Score    ',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 30,
+                                              ),
+                                            ),
+                                          ),
+                                            SizedBox(width: 20),
+                                            RaisedButton(
+                                            color: Color(0xff7560ED),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            onPressed: () => print('follow'),
+                                            child: Text(
+                                              ' Player List ',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 30,
+                                              ),
+                                            ),
+                                          ),
+                                            SizedBox(width: 20),
+                                            RaisedButton(
+                                            color: Color(0xff7560ED),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            onPressed: () => print('follow'),
+                                            child: Text(
+                                              '   Result   ',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 30,
+                                              ),
+                                            ),
+                                          ),
+                                            SizedBox(width: 20),
+                                            RaisedButton(
+                                            color: Color(0xff7560ED),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            onPressed: () => print('follow'),
+                                            child: Text(
+                                              '   Back   ',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 30,
+                                              ),
+                                            ),
+                                          ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      IntrinsicHeight(
+                                        child: Row(
+                                          children: <Widget>[
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            if(state==0)                                
+                                              ScoreWidget(media: _media)
+                                              else if(state==1)
+                                              ProfileWidget(media: _media)
+                                          ],
+                                        ),
+                                      ),
+>>>>>>> master
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -112,6 +219,7 @@ class _MainPage extends State<MainPage> {
                                 ],
                               ),
                             ),
+<<<<<<< HEAD
 
 
                             IntrinsicHeight(
@@ -150,6 +258,22 @@ class _MainPage extends State<MainPage> {
                                 ],
                               ),
                             ),
+=======
+                            IntrinsicHeight(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  CommentWidget(media: _media),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  ProfileWidget(media: _media),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 20),
+>>>>>>> master
                           ],
 
 

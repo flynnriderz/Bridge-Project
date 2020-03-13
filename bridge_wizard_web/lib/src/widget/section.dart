@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter_web_dashboard/src/model/menu.dart';
 import 'package:flutter_web_dashboard/src/widget/sidebar_menu..dart';
 class TabsNonScrollableDemo extends StatefulWidget {
@@ -10,9 +11,14 @@ class TabsNonScrollableDemo extends StatefulWidget {
   _TabsNonScrollableDemo createState() => _TabsNonScrollableDemo();
 }
 class _TabsNonScrollableDemo extends State<TabsNonScrollableDemo>{
+=======
+import 'package:flutter_web_dashboard/src/widget/profile_Widget.dart';
+import 'package:flutter_web_dashboard/src/widget/score_widget.dart';
+>>>>>>> master
 
   @override
   Widget build(BuildContext context) {
+    final _media = MediaQuery.of(context).size;
     List<String> tabs = [
       'Detail','Score','Player list','Result'
     ];
@@ -33,10 +39,10 @@ class _TabsNonScrollableDemo extends State<TabsNonScrollableDemo>{
         ),
         body: TabBarView(
           children: [
-            for (final tab in tabs)
-              Center(
-                child: Text(tab),
-              ),
+            ProfileWidget(media: _media),
+            ScoreWidget(media: _media,),
+            ProfileWidget(media: _media),
+            ScoreWidget(media: _media,),
           ],
         ),
       ),
