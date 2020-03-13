@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_web_dashboard/src/model/menu.dart';
 import 'package:flutter_web_dashboard/src/model/section.dart';
 import 'package:flutter_web_dashboard/src/commons/theme.dart';
+import 'package:flutter_web_dashboard/src/widget/create_section.dart';
 import 'package:flutter_web_dashboard/src/widget/responsive_widget.dart';
 
 import 'package:flutter_web_dashboard/src/widget/sidebar_menu..dart';
@@ -81,7 +82,7 @@ class _CreateTournament extends State<CreateTournament> {
                     width: 20,
                  ), 
                  RaisedButton(    
-                   child: Text("Submit"),    
+                   child: Text("Create section"),    
                    onPressed: () {    
                      _fbKey.currentState.save();    
                      if (_fbKey.currentState.validate()) {    
@@ -94,7 +95,8 @@ class _CreateTournament extends State<CreateTournament> {
                       location: _fbKey.currentState.value.values.toList()[3],
                       section: sections[0]),
                       ]);
-                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context)=> CreateSection()));
                      }    
                    },    
                  ),       

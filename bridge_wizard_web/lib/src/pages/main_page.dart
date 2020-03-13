@@ -119,13 +119,17 @@ class _MainPage extends State<MainPage> {
                                 sortAscending: true,
                                 sortColumnIndex: 0,
                                 columns: [
+                                  
                                   DataColumn(
+                                    
                                       label: Text(
                                         "Section",
                                         style: TextStyle(
                                             fontSize: 20, fontWeight: FontWeight.w900),
                                       ),
-                                      tooltip: "Student USN Number"),
+                                      tooltip: "Student USN Number"
+                                      ),
+                                      
                                   DataColumn(
                                       label: Text(
                                     "Type",
@@ -135,9 +139,10 @@ class _MainPage extends State<MainPage> {
                                 rows: [
                                   DataRow(
                                     cells: [
-                                      DataCell(Text(menuItems[selectedIndex].section.title), showEditIcon: true),
+                                      DataCell(Text(menuItems[selectedIndex].section.title), showEditIcon: false),
                                       DataCell(Text(menuItems[selectedIndex].section.type)),
                                     ],
+                                    
                                     selected: false,
                                      onSelectChanged: (bool selected) {
                                       if (selected) {
