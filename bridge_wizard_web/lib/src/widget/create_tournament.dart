@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';    
 import 'package:flutter_web_dashboard/src/model/menu.dart';
 import 'package:flutter_web_dashboard/src/model/section.dart';
+import 'package:flutter_web_dashboard/src/commons/theme.dart';
+import 'package:flutter_web_dashboard/src/widget/responsive_widget.dart';
+
 import 'package:flutter_web_dashboard/src/widget/sidebar_menu..dart';
 
 class CreateTournament extends StatefulWidget {    
@@ -19,15 +22,20 @@ class _CreateTournament extends State<CreateTournament> {
  @override    
  Widget build(BuildContext context) {    
    return Scaffold(    
-     appBar: AppBar(    
+     appBar: AppBar(  
+        backgroundColor: drawerBgColor,
+        automaticallyImplyLeading: false,
        title: Text("Flutter Form Validation"),    
      ),    
      body: Padding(    
        padding: EdgeInsets.all(10),    
        child: SingleChildScrollView(    
          child: Column(    
+           crossAxisAlignment: CrossAxisAlignment.center,
+           mainAxisAlignment: MainAxisAlignment.center,
            children: <Widget>[    
              FormBuilder(    
+               
                key: _fbKey,    
                initialValue: {    
                  'date': DateTime.now(),    
@@ -37,11 +45,23 @@ class _CreateTournament extends State<CreateTournament> {
                child: Column(    
                  children: <Widget>[    
                    FormBuilderTextField(    
+                     style: TextStyle(
+                              fontSize: ResponsiveWidget.isLargeScreen(context)
+                                  ? 26
+                                  : 18,
+                              color: Colors.black,
+                            ),
                      attribute: 'Tournament_name',    
                      validators: [FormBuilderValidators.required()],    
                      decoration: InputDecoration(labelText: "Tournament name"),    
                    ),    
-                   FormBuilderTextField(    
+                   FormBuilderTextField(
+                     style: TextStyle(
+                              fontSize: ResponsiveWidget.isLargeScreen(context)
+                                  ? 26
+                                  : 18,
+                              color: Colors.black,
+                            ),    
                      attribute: "Location",      
                      validators: [FormBuilderValidators.required()],    
                      decoration: InputDecoration(labelText: "Location"),    
@@ -50,8 +70,17 @@ class _CreateTournament extends State<CreateTournament> {
                ),    
              ),    
              Row(    
-               children: <Widget>[    
-                 MaterialButton(    
+               children: <Widget>[   
+                 RaisedButton(    
+                   child: Text("Cancle"),    
+                   onPressed: () {    
+                     Navigator.pop(context);  
+                   },    
+                 ), 
+                 SizedBox(
+                    width: 20,
+                 ), 
+                 RaisedButton(    
                    child: Text("Submit"),    
                    onPressed: () {    
                      _fbKey.currentState.save();    
@@ -68,13 +97,7 @@ class _CreateTournament extends State<CreateTournament> {
                       Navigator.pop(context);
                      }    
                    },    
-                 ),    
-                 MaterialButton(    
-                   child: Text("Reset"),    
-                   onPressed: () {    
-                     _fbKey.currentState.reset();    
-                   },    
-                 ),    
+                 ),       
                ],    
              )    
            ],    

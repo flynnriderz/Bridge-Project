@@ -70,6 +70,7 @@ class _SideBarMenuState extends State<SideBarMenu>
                         setState(() {
                           selectedIndex = index;
                         });
+                        Navigator.pop(context);
                         Navigator.push(context, MaterialPageRoute(
                                               builder: (context)=> MainPage()));
                       },

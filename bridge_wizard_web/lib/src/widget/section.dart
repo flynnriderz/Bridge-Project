@@ -3,18 +3,18 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:flutter_web_dashboard/src/model/menu.dart';
 import 'package:flutter_web_dashboard/src/widget/sidebar_menu..dart';
+import 'package:flutter_web_dashboard/src/widget/profile_Widget.dart';
+import 'package:flutter_web_dashboard/src/widget/score_widget.dart';
+import 'package:flutter_web_dashboard/src/commons/theme.dart';
+
 class TabsNonScrollableDemo extends StatefulWidget {
   @override
   _TabsNonScrollableDemo createState() => _TabsNonScrollableDemo();
 }
 class _TabsNonScrollableDemo extends State<TabsNonScrollableDemo>{
-=======
-import 'package:flutter_web_dashboard/src/widget/profile_Widget.dart';
-import 'package:flutter_web_dashboard/src/widget/score_widget.dart';
->>>>>>> master
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,8 @@ import 'package:flutter_web_dashboard/src/widget/score_widget.dart';
       length: tabs.length,
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          backgroundColor: drawerBgColor,
+          automaticallyImplyLeading: true,
           title:
               Text(menuItems[selectedIndex].section.title),
           bottom: TabBar(
