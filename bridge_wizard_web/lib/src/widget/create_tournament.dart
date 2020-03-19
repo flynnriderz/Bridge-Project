@@ -1,12 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';    
 import 'package:flutter_form_builder/flutter_form_builder.dart';    
-import 'package:flutter_web_dashboard/src/model/menu.dart';
-import 'package:flutter_web_dashboard/src/model/section.dart';
-import 'package:flutter_web_dashboard/src/commons/theme.dart';
-import 'package:flutter_web_dashboard/src/widget/create_section.dart';
-import 'package:flutter_web_dashboard/src/widget/responsive_widget.dart';
+import 'package:bridge_wizard_web/src/model/menu.dart';
+import 'package:bridge_wizard_web/src/model/section.dart';
+import 'package:bridge_wizard_web/src/commons/theme.dart';
+import 'package:bridge_wizard_web/src/widget/create_section.dart';
+import 'package:bridge_wizard_web/src/widget/responsive_widget.dart';
 
-import 'package:flutter_web_dashboard/src/widget/sidebar_menu..dart';
+import 'package:bridge_wizard_web/src/widget/sidebar_menu..dart';
 
 class CreateTournament extends StatefulWidget {    
  @override    
@@ -19,7 +20,6 @@ class _CreateTournament extends State<CreateTournament> {
  bool readOnly = false;    
  bool showSegmentedControl = true;    
  final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();    
-     
  @override    
  Widget build(BuildContext context) {    
    return Scaffold(    

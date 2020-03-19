@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_dashboard/src/widget/card_tile.dart';
+import 'package:bridge_wizard_web/src/widget/card_tile.dart';
 
 class HomePage extends StatelessWidget {
   @override

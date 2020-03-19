@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_dashboard/src/commons/theme.dart';
-import 'package:flutter_web_dashboard/src/model/menu.dart';
-import 'package:flutter_web_dashboard/src/pages/main_page.dart';
-import 'package:flutter_web_dashboard/src/widget/menu_item_tile.dart';
-import 'package:flutter_web_dashboard/src/widget/create_tournament.dart';
+import 'package:bridge_wizard_web/src/commons/theme.dart';
+import 'package:bridge_wizard_web/src/model/menu.dart';
+import 'package:bridge_wizard_web/src/pages/main_page.dart';
+import 'package:bridge_wizard_web/src/widget/menu_item_tile.dart';
+import 'package:bridge_wizard_web/src/widget/create_tournament.dart';
 
 
 class SideBarMenu extends StatefulWidget {

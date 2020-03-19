@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:flutter/material.dart';    
 import 'package:flutter_form_builder/flutter_form_builder.dart';    
 import 'package:intl/intl.dart';  
-import 'package:flutter_web_dashboard/src/commons/theme.dart';
+import 'package:bridge_wizard_web/src/commons/theme.dart';
 
 
 class CreateSection extends StatefulWidget {    

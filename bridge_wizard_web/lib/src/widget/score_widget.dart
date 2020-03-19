@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_dashboard/src/commons/theme.dart';
-import 'package:flutter_web_dashboard/src/model/project_model.dart';
+import 'package:bridge_wizard_web/src/commons/theme.dart';
+import 'package:bridge_wizard_web/src/model/project_model.dart';
 
 class ScoreWidget extends StatelessWidget {
   const ScoreWidget({

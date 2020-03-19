@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_dashboard/src/widget/responsive_widget.dart';
+import 'package:bridge_wizard_web/src/widget/responsive_widget.dart';
 
 class ChartCardTile extends StatelessWidget {
   final Color cardColor;

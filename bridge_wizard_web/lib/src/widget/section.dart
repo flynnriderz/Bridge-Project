@@ -3,11 +3,11 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_web_dashboard/src/model/menu.dart';
-import 'package:flutter_web_dashboard/src/widget/sidebar_menu..dart';
-import 'package:flutter_web_dashboard/src/widget/profile_Widget.dart';
-import 'package:flutter_web_dashboard/src/widget/score_widget.dart';
-import 'package:flutter_web_dashboard/src/commons/theme.dart';
+import 'package:bridge_wizard_web/src/model/menu.dart';
+import 'package:bridge_wizard_web/src/widget/sidebar_menu..dart';
+import 'package:bridge_wizard_web/src/widget/profile_Widget.dart';
+import 'package:bridge_wizard_web/src/widget/score_widget.dart';
+import 'package:bridge_wizard_web/src/commons/theme.dart';
 
 class TabsNonScrollableDemo extends StatefulWidget {
   @override

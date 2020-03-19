@@ -2,9 +2,34 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>flutter_web_dashboard</title>
+  <title>bridge_wizard_web</title>
+  
 </head>
 <body>
-  <script src="main.dart.js" type="application/javascript"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-firestore.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDjeDtmBgx_ZDlyUBWlCddGpeRhsPKYznE",
+    authDomain: "bridge-wizard.firebaseapp.com",
+    databaseURL: "https://bridge-wizard.firebaseio.com",
+    projectId: "bridge-wizard",
+    storageBucket: "bridge-wizard.appspot.com",
+    messagingSenderId: "296088919010",
+    appId: "1:296088919010:web:a6e611799230290c3777bb",
+    measurementId: "G-C7JNJVF0H1"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+<script src="main.dart.js" type="application/javascript"></script>
+
 </body>
 </html>
