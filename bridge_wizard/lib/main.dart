@@ -1,10 +1,17 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import './models/transaction.dart';
-import './widgets/list_transactions.dart';
-import './widgets/new_transactions.dart';
-import './widgets/chart.dart';
+import './models/player.dart';
+import './models/pair.dart';
+import './models/table.dart';
+import './widgets/round_display.dart';
+import './widgets/contract_editor.dart';
+import './widgets/by_editor.dart';
+import './widgets/trump_editor.dart';
+import './widgets/double_editor.dart';
+import './widgets/vulnerable_editor.dart';
+import './widgets/made_editor.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,11 +23,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
         accentColor: Colors.deepOrangeAccent,
+        errorColor: Colors.grey,
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
               title: TextStyle(
                 fontFamily: 'OpenSans',
                 fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              button: TextStyle(
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -40,64 +52,27 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  // String titleInput;
-  // String amountInput;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _userTransactions = [
-    // Transaction(
-    //   id: 't1',
-    //   title: 'Some Shoes',
-    //   amount: 69.99,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Another Groceries',
-    //   amount: 89.99,
-    //   date: DateTime.now(),
-    // ),
+  final List<Player> _playerName = [
+    Player(id: 'p1', firstName: 'John F.', lastname: 'Kennedy'),
+    Player(id: 'p2', firstName: 'Barack', lastname: 'Obama'),
+    Player(id: 'p3', firstName: 'Vladimir', lastname: 'Lenin'),
+    Player(id: 'p4', firstName: 'Vladimir', lastname: 'Putin'),
   ];
 
-  List<Transaction> get _recentTransactions {
-    return _userTransactions.where((tx) {
-      return tx.date.isAfter(
-        DateTime.now().subtract(
-          Duration(days: 7),
-        )
-      );
-    }).toList();
-  }
+  final List<Pair> _team = [
+    Pair(teamID: 't001', firstID: 'p1', secondID: 'p2'),
+    Pair(teamID: 't002', firstID: 'p3', secondID: 'p4'),
+  ];
 
-  void _addNewTransaction(String txTitle, double txAmount) {
-    final newTx = Transaction(
-      title: txTitle,
-      amount: txAmount,
-      date: DateTime.now(),
-      id: DateTime.now().toString(),
-    );
-
-    setState(() {
-      _userTransactions.add(newTx);
-    });
-  }
-
-  void _startAddNewTransaction(BuildContext ctx) {
-    showModalBottomSheet(
-      context: ctx,
-      builder: (_) {
-        return GestureDetector(
-          onTap: () {},
-          child: NewTransaction(_addNewTransaction),
-          behavior: HitTestBehavior.opaque,
-        );
-      },
-    );
-  }
+  final List<Tables> _table = [
+    Tables(table: 2, round: 3, board: 16, teamNS: 't001', teamEW: 't002'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -106,41 +81,33 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(
           'Bridge Wizard (beta)',
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _startAddNewTransaction(context),
-          )
-        ],
+        // actions: <Widget>[
+        //   IconButton(
+        //     icon: Icon(Icons.add),
+        //     onPressed: () {},
+        //   )
+        // ],
       ),
       body: SingleChildScrollView(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            // Container(
-            //   width: double.infinity,
-            //   child: Card(
-            //     color: Theme.of(context).primaryColor,
-            //     child: Text(
-            //       'JUST A CHART!',
-            //       style: TextStyle(
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //     elevation: 9,
-            //   ),
-            // ),
-            Chart(_recentTransactions),
-            TransactionList(_userTransactions),
+            RoundDisplay(_table, _team, _playerName),
+            ByEditor(),
+            ContractEditor(),
+            TrumpEditor(),
+            DoubleEditor(),
+            VulnerableEditor(),
+            MadeEditor(),
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransaction(context),
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.add),
+      //   onPressed: () => {},
+      // ),
     );
   }
 }
