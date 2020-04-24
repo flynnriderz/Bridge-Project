@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import '../models/calculating.dart';
 
 class ContractEditor extends StatefulWidget {
   @override
@@ -6,17 +7,18 @@ class ContractEditor extends StatefulWidget {
 }
 
 class _ContractEditorState extends State<ContractEditor> {
-  int _contractPoint = 1;
+  int contractPoint = 1;
+
 
   void _contractIncrese() {
     setState(() {
-      _contractPoint += 1;
+      contractPoint += 1;
     });
   }
 
   void _contractDecrese() {
     setState(() {
-      _contractPoint -= 1;
+      contractPoint -= 1;
     });
   }
 
@@ -27,11 +29,11 @@ class _ContractEditorState extends State<ContractEditor> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Container(
-            width: 90,
+            width: 100,
             height: 60,
             child: Card(
               child: Center(
-                child: Text(
+                child: const Text(
                   'contract',
                   style: TextStyle(
                     fontSize: 20,
@@ -52,10 +54,10 @@ class _ContractEditorState extends State<ContractEditor> {
                     leading: IconButton(
                       icon: Icon(Icons.arrow_back_ios),
                       color: Theme.of(context).errorColor,
-                      onPressed: _contractPoint <= 1 ? null : _contractDecrese,
+                      onPressed: contractPoint <= 1 ? null : _contractDecrese,
                     ),
                     title: Text(
-                      '$_contractPoint',
+                      '$contractPoint',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
@@ -66,7 +68,7 @@ class _ContractEditorState extends State<ContractEditor> {
                     trailing: IconButton(
                       icon: Icon(Icons.arrow_forward_ios),
                       color: Theme.of(context).errorColor,
-                      onPressed: _contractPoint >= 7 ? null : _contractIncrese,
+                      onPressed: contractPoint >= 7 ? null : _contractIncrese,
                     ),
                   ),
                 ),

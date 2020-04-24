@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 // import 'package:intl/intl.dart';
 
-import '../models/pair.dart';
-import '../models/player.dart';
-import '../models/table.dart';
+import '../../models/pair.dart';
+import '../../models/round.dart';
 
 class RoundDisplay extends StatelessWidget {
-  final List<Tables> table;
+  final List<Rounds> round;
   final List<Pair> pair;
-  final List<Player> player;
 
-  RoundDisplay(this.table, this.pair, this.player);
+  RoundDisplay(this.round, this.pair);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +28,7 @@ class RoundDisplay extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Text(
-                  'Table: ${table[0].table}',
+                  'Table: ${round[0].table}',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 10,
@@ -39,7 +37,7 @@ class RoundDisplay extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  'Round: ${table[0].round}',
+                  'Round: ${round[0].round}',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 10,
@@ -48,7 +46,7 @@ class RoundDisplay extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  'Board: ${table[0].board}',
+                  'Board: ${round[0].board}',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 10,
@@ -61,12 +59,6 @@ class RoundDisplay extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            // decoration: BoxDecoration(
-            //   border: Border.all(
-            //     color: Colors.black,
-            //     width: 1,
-            //   ),
-            // ),
             padding: EdgeInsets.all(5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -83,7 +75,8 @@ class RoundDisplay extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      '${player[0].firstName} ${player[0].lastname}',
+                      pair[0].player1 != null ?
+                      '${pair[0].player1}' : '-',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 10,
@@ -92,7 +85,8 @@ class RoundDisplay extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      '${player[1].firstName} ${player[1].lastname}',
+                      pair[0].player2 != null ?
+                      '${pair[0].player2}' : '-',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 10,
@@ -114,7 +108,8 @@ class RoundDisplay extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      '${player[2].firstName} ${player[2].lastname}',
+                      pair[1].player1 != null ?
+                      '${pair[1].player1}' : '-',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 10,
@@ -123,7 +118,8 @@ class RoundDisplay extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      '${player[3].firstName} ${player[3].lastname}',
+                      pair[1].player2 != null ?
+                      '${pair[1].player2}' : '-',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 10,

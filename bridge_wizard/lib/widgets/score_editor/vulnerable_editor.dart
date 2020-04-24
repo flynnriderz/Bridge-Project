@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 
-class MadeEditor extends StatefulWidget {
+class VulnerableEditor extends StatefulWidget {
   @override
-  _MadeEditorState createState() => _MadeEditorState();
+  _VulnerableEditorState createState() => _VulnerableEditorState();
 }
 
-class _MadeEditorState extends State<MadeEditor> {
-  int _made = 7;
+class _VulnerableEditorState extends State<VulnerableEditor> {
+  // String vulnerable = 'Non-Vulnerable';
+  List vulnerable = ['Non-Vulnerable', 'Vulnerable'];
+  int _index = 0;
 
-  void _madeIncrese() {
+  void _indexIncrese() {
     setState(() {
-      _made += 1;
+      _index += 1;
     });
     
   }
 
-  void _madeDecrese() {
+  void _indexDecrese() {
     setState(() {
-      _made -= 1;
+      _index -= 1;
     });
     
   }
@@ -29,14 +31,14 @@ class _MadeEditorState extends State<MadeEditor> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Container(
-            width: 90,
+            width: 100,
             height: 60,
             child: Card(
               child: Center(
                 child: Text(
-                  'made',
+                  'vulnerable',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     color: Colors.black87,
                   ),
                   textAlign: TextAlign.center,
@@ -53,13 +55,13 @@ class _MadeEditorState extends State<MadeEditor> {
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios),
                     color: Theme.of(context).errorColor,
-                    onPressed: _made <= 0 ? null : _madeDecrese,
+                    onPressed: _index <= 0 ? null : _indexDecrese,
                   ),
                   title: Text(
-                    '$_made',
+                    '${vulnerable[_index]}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 30,
+                      fontSize: 18,
                       color: Colors.black87,
                     ),
                     textAlign: TextAlign.center,
@@ -67,7 +69,7 @@ class _MadeEditorState extends State<MadeEditor> {
                   trailing: IconButton(
                     icon: Icon(Icons.arrow_forward_ios),
                     color: Theme.of(context).errorColor,
-                    onPressed: _made >= 13 ? null : _madeIncrese,
+                    onPressed: _index >= 1 ? null : _indexIncrese,
                   ),
                 ),
               ),
@@ -75,6 +77,7 @@ class _MadeEditorState extends State<MadeEditor> {
           ),
         ],
       ),
+      //),
     );
   }
 }

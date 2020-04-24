@@ -1,19 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-
-class Tables{
-  final int table;
+class Rounds{
   final int round;
+  final int table;
   final int board;
   final String teamNS;
   final String teamEW;
   int teamNSScore;
   int teamEWScore;
 
-  Tables({
-    @required this.table,
+  Rounds({
     @required this.round,
+    @required this.table,
     @required this.board,
     @required this.teamNS,
     @required this.teamEW,

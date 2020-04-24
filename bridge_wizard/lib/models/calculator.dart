@@ -1,4 +1,4 @@
-import 'dart:math';
+// import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 
@@ -29,8 +29,8 @@ class Calculating {
   bool _isVulnerable = false; ////////////////////////
   bool _isPenalty = false; ////////////////////////
 
-  int _level = 0;
-  int _biddingWeight = 0; ////////////////////////
+  //int _level = 0;
+  //int _biddingWeight = 0; ////////////////////////
 
   Calculating({
     @required this.contract,

@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
-class ByEditor extends StatefulWidget {
+class DeclarerEditor extends StatefulWidget {
   @override
-  _ByEditorState createState() => _ByEditorState();
+  _DeclarerEditorState createState() => _DeclarerEditorState();
 }
 
-class _ByEditorState extends State<ByEditor> {
-  String _by = 'N - S';
+class _DeclarerEditorState extends State<DeclarerEditor> {
+  List _declarer = ['N', 'E', 'S', 'W'];
+  int _index = 0;
 
-  void _byNS() {
+  void _indexIncrese() {
     setState(() {
-      _by = 'N - S';
+      _index += 1;
     });
     
   }
 
-  void _byEW() {
+  void _indexDecrese() {
     setState(() {
-      _by = 'E - W';
+      _index -= 1;
     });
     
   }
@@ -29,12 +30,12 @@ class _ByEditorState extends State<ByEditor> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Container(
-            width: 90,
+            width: 100,
             height: 60,
             child: Card(
               child: Center(
-                child: Text(
-                  'by',
+                child: const Text(
+                  'declarer',
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black87,
@@ -53,10 +54,10 @@ class _ByEditorState extends State<ByEditor> {
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios),
                     color: Theme.of(context).errorColor,
-                    onPressed: _by == 'E - W' ? _byNS : null,
+                    onPressed: _index <= 0 ? null : _indexDecrese,
                   ),
                   title: Text(
-                    '$_by',
+                    '${_declarer[_index]}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
@@ -67,7 +68,7 @@ class _ByEditorState extends State<ByEditor> {
                   trailing: IconButton(
                     icon: Icon(Icons.arrow_forward_ios),
                     color: Theme.of(context).errorColor,
-                    onPressed: _by == 'N - S' ? _byEW : null,
+                    onPressed: _index >= 3 ? null : _indexIncrese,
                   ),
                 ),
               ),
@@ -75,7 +76,7 @@ class _ByEditorState extends State<ByEditor> {
           ),
         ],
       ),
-      //),
+
     );
   }
 }

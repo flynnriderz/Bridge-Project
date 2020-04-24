@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
-class VulnerableEditor extends StatefulWidget {
+class DoubleEditor extends StatefulWidget {
   @override
-  _VulnerableEditorState createState() => _VulnerableEditorState();
+  _DoubleEditorState createState() => _DoubleEditorState();
 }
 
-class _VulnerableEditorState extends State<VulnerableEditor> {
-  String _vulnerable = 'Non-Vulnerable';
+class _DoubleEditorState extends State<DoubleEditor> {
+  List doubled = ['Undouble', 'Double', 'Redouble'];
+  int _index = 0;
 
-  void _nonVulnerable() {
+  void _indexIncrese() {
     setState(() {
-      _vulnerable = 'Non-Vulnerable';
+      _index += 1;
     });
     
   }
 
-  void _isVulnerable() {
+  void _indexDecrese() {
     setState(() {
-      _vulnerable = 'Vulnerable';
+      _index -= 1;
     });
     
   }
@@ -29,17 +30,16 @@ class _VulnerableEditorState extends State<VulnerableEditor> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Container(
-            width: 90,
+            width: 100,
             height: 60,
             child: Card(
               child: Center(
-                child: Text(
-                  'by',
+                child: const Text(
+                  'doubled',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 20,
                     color: Colors.black87,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
             ),
@@ -53,13 +53,13 @@ class _VulnerableEditorState extends State<VulnerableEditor> {
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios),
                     color: Theme.of(context).errorColor,
-                    onPressed: _vulnerable == 'Vulnerable' ? _nonVulnerable : null,
+                    onPressed: _index <= 0 ? null : _indexDecrese,
                   ),
                   title: Text(
-                    '$_vulnerable',
+                    '${doubled[_index]}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 21,
                       color: Colors.black87,
                     ),
                     textAlign: TextAlign.center,
@@ -67,7 +67,7 @@ class _VulnerableEditorState extends State<VulnerableEditor> {
                   trailing: IconButton(
                     icon: Icon(Icons.arrow_forward_ios),
                     color: Theme.of(context).errorColor,
-                    onPressed: _vulnerable == 'Non-Vulnerable' ? _isVulnerable : null,
+                    onPressed: _index >= 2 ? null : _indexIncrese,
                   ),
                 ),
               ),
@@ -75,7 +75,6 @@ class _VulnerableEditorState extends State<VulnerableEditor> {
           ),
         ],
       ),
-      //),
     );
   }
 }

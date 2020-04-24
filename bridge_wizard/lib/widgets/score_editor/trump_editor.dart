@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class DoubleEditor extends StatefulWidget {
+class TrumpEditor extends StatefulWidget {
   @override
-  _DoubleEditorState createState() => _DoubleEditorState();
+  _TrumpEditorState createState() => _TrumpEditorState();
 }
 
-class _DoubleEditorState extends State<DoubleEditor> {
-  List doubled = ['Undouble', 'Double', 'Redouble'];
+class _TrumpEditorState extends State<TrumpEditor> {
+  List trump = ['Clubs', 'Diamonds', 'Hearts', 'Spades', 'No Trump'];
   int _index = 0;
 
   void _indexIncrese() {
@@ -30,12 +30,12 @@ class _DoubleEditorState extends State<DoubleEditor> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Container(
-            width: 90,
+            width: 100,
             height: 60,
             child: Card(
               child: Center(
-                child: Text(
-                  'Doubled',
+                child: const Text(
+                  'trump',
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black87,
@@ -57,10 +57,10 @@ class _DoubleEditorState extends State<DoubleEditor> {
                     onPressed: _index <= 0 ? null : _indexDecrese,
                   ),
                   title: Text(
-                    '${doubled[_index]}',
+                    '${trump[_index]}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 22,
+                      fontSize: 20,
                       color: Colors.black87,
                     ),
                     textAlign: TextAlign.center,
@@ -68,7 +68,7 @@ class _DoubleEditorState extends State<DoubleEditor> {
                   trailing: IconButton(
                     icon: Icon(Icons.arrow_forward_ios),
                     color: Theme.of(context).errorColor,
-                    onPressed: _index >= 2 ? null : _indexIncrese,
+                    onPressed: _index >= 4 ? null : _indexIncrese,
                   ),
                 ),
               ),
