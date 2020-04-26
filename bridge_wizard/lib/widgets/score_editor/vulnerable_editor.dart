@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import '../../models/calculator.dart';
 
 class VulnerableEditor extends StatefulWidget {
+  final Calculator recentCalculator;
+  VulnerableEditor(this.recentCalculator);
+
   @override
   _VulnerableEditorState createState() => _VulnerableEditorState();
 }
 
 class _VulnerableEditorState extends State<VulnerableEditor> {
-  // String vulnerable = 'Non-Vulnerable';
-  List vulnerable = ['Non-Vulnerable', 'Vulnerable'];
+  List _vulnerable = ['Non-Vulnerable', 'Vulnerable'];
   int _index = 0;
 
   void _indexIncrese() {
     setState(() {
       _index += 1;
+      widget.recentCalculator.vulnerableIndexes = _index;
     });
     
   }
@@ -20,8 +24,13 @@ class _VulnerableEditorState extends State<VulnerableEditor> {
   void _indexDecrese() {
     setState(() {
       _index -= 1;
+      widget.recentCalculator.vulnerableIndexes = _index;
     });
     
+  }
+
+  int get thisIndex {
+    return _index;
   }
 
   @override
@@ -58,7 +67,7 @@ class _VulnerableEditorState extends State<VulnerableEditor> {
                     onPressed: _index <= 0 ? null : _indexDecrese,
                   ),
                   title: Text(
-                    '${vulnerable[_index]}',
+                    '${_vulnerable[_index]}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,

@@ -13,10 +13,11 @@ class _ConfirmButtonState extends State<ConfirmButton> {
       // crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         RaisedButton(
-            child: Text('Confirm'),
-            color: Theme.of(context).primaryColor,
-            textColor: Theme.of(context).textTheme.button.color,
-            onPressed: () {}),
+          child: Text('Confirm'),
+          color: Colors.blue,
+          textColor: Theme.of(context).textTheme.button.color,
+          onPressed: () {},
+        ),
       ],
     );
   }

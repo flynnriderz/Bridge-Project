@@ -1,13 +1,13 @@
-// import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 
-class Calculating {
-  int _questionIndex; ////////////////////////
-
-  final int contract;
-  final String trump;
-  final int made;
+class Calculator {
+  int declarerIndex;
+  int contractValue;
+  int trumpIndex;
+  int doubleIndex;
+  int vulnerableIndex;
+  int madeValue;
 
   int _contractPoint = 0;
   int _overtrickPoint = 0;
@@ -16,10 +16,13 @@ class Calculating {
   int _underTrickPenalty = 0; ////////////////////////
 
   String _resultContract = '';
+  String _madeString = '';
+  String _vulnerableString = '';
+  String _declarerString = '';
   int _totalScore = 0; ////////////////////////
 
-  bool isDouble = false;
-  bool isRedouble = false; ////////////////////////
+  bool _isDouble = false;
+  bool _isRedouble = false; ////////////////////////
 
   bool _isGame = false;
   bool _isSlam = false;
@@ -29,97 +32,73 @@ class Calculating {
   bool _isVulnerable = false; ////////////////////////
   bool _isPenalty = false; ////////////////////////
 
-  //int _level = 0;
-  //int _biddingWeight = 0; ////////////////////////
+  int _level = 0;
+  int _biddingWeight = 0; ////////////////////////
+  List declarer = ['N', 'E', 'S', 'W'];
+  List doubled = ['', 'x', 'xx'];
+  List trump = ['C', 'D', 'H', 'S', 'NT'];
+  List vulnerable = ['No', 'Yes'];
 
-  Calculating({
-    @required this.contract,
-    @required this.trump,
-    @required this.made,
-    @required this.isDouble,
-    @required this.isRedouble,
+  Calculator({
+    this.declarerIndex,
+    this.contractValue,
+    this.trumpIndex,
+    this.doubleIndex,
+    this.vulnerableIndex,
+    this.madeValue,
   });
 
-  int get questionIndexes {
-    return _questionIndex;
-  }
-
-  set questionIndexes(int questionIndex) {
-    this._questionIndex = questionIndex;
-  }
-
-  // int get mades {
-  //   return made;
+  // --------------------------------------------------------unnessesary
+  // int get contractPoints {
+  //   return _contractPoint;
   // }
 
-  // set mades(int made) {
-  //   this.made = made;
+  // set contractPoints(int contractPoint) {
+  //   this._contractPoint = contractPoint;
   // }
 
-  // int get contracts {
-  //   return contract;
+  // int get overtrickPoints {
+  //   return _overtrickPoint;
   // }
 
-  // set contracts(int contract) {
-  //   this.contract = contract;
+  // set overtrickPoints(int overtrickPoint) {
+  //   this._overtrickPoint = overtrickPoint;
   // }
 
-  // String get trumps {
-  //   return trump;
+  // int get slamBonuses {
+  //   return _slamBonus;
   // }
 
-  // set trumps(String trump) {
-  //   this.trump = trump;
+  // set slamBonuses(int slamBonus) {
+  //   this._slamBonus = slamBonus;
   // }
 
-  int get contractPoints {
-    return _contractPoint;
-  }
+  // int get doubleBonuses {
+  //   return _doubleBonus;
+  // }
 
-  set contractPoints(int contractPoint) {
-    this._contractPoint = contractPoint;
-  }
+  // set doubleBonuses(int doubleBonus) {
+  //   this._doubleBonus = doubleBonus;
+  // }
 
-  int get overtrickPoints {
-    return _overtrickPoint;
-  }
+  // int get underTrickPenalties {
+  //   return _underTrickPenalty;
+  // }
 
-  set overtrickPoints(int overtrickPoint) {
-    this._overtrickPoint = overtrickPoint;
-  }
+  // set underTrickPenalties(int underTrickPenalty) {
+  //   this._underTrickPenalty = underTrickPenalty;
+  // }
 
-  int get slamBonuses {
-    return _slamBonus;
-  }
+  // String get resultContracts {
+  //   return _resultContract;
+  // }
 
-  set slamBonuses(int slamBonus) {
-    this._slamBonus = slamBonus;
-  }
+  // set resultContracts(String resultContract) {
+  //   this._resultContract = resultContract;
+  // }
+  //--------------------------------------------------------unnessesary end
 
-  int get doubleBonuses {
-    return _doubleBonus;
-  }
-
-  set doubleBonuses(int doubleBonus) {
-    this._doubleBonus = doubleBonus;
-  }
-
-  int get underTrickPenalties {
-    return _underTrickPenalty;
-  }
-
-  set underTrickPenalties(int underTrickPenalty) {
-    this._underTrickPenalty = underTrickPenalty;
-  }
-
-  String get resultContracts {
-    return _resultContract;
-  }
-
-  set resultContracts(String resultContract) {
-    this._resultContract = resultContract;
-  }
-
+  // _totalScore;
   int get totalScores {
     return _totalScore;
   }
@@ -128,11 +107,105 @@ class Calculating {
     this._totalScore = totalScore;
   }
 
+  // declarerIndex;
+  int get declarerIndexes {
+    return declarerIndex;
+  }
+
+  set declarerIndexes(int declarerIndex) {
+    this.declarerIndex = declarerIndex;
+  }
+
+  // contractValue;
+  int get contractValues {
+    return contractValue;
+  }
+
+  set contractValues(int contractValue) {
+    this.contractValue = contractValue;
+  }
+
+  // trumpIndex;
+  int get trumpIndexes {
+    return trumpIndex;
+  }
+
+  set trumpIndexes(int trumpIndex) {
+    this.trumpIndex = trumpIndex;
+  }
+
+  // doubleIndex;
+  int get doubleIndexes {
+    return doubleIndex;
+  }
+
+  set doubleIndexes(int doubleIndex) {
+    this.doubleIndex = doubleIndex;
+  }
+
+  // vulnerableIndex;
+  int get vulnerableIndexes {
+    return vulnerableIndex;
+  }
+
+  set vulnerableIndexes(int vulnerableIndex) {
+    this.vulnerableIndex = vulnerableIndex;
+  }
+
+  // madeValue;
+  int get madeValues {
+    return madeValue;
+  }
+
+  set madeValues(int madeValue) {
+    this.madeValue = madeValue;
+  }
+
+  // _resultContract;
+  String get resultContracts {
+    return _resultContract;
+  }
+
+  set resultContracts(String _resultContract) {
+    this._resultContract = _resultContract;
+  }
+
+  // _madeString;
+  String get madeStrings {
+    return _madeString;
+  }
+
+  set madeStrings(String _madeString) {
+    this._madeString = _madeString;
+  }
+
+  // _vulnerableString;
+  String get vulnerableStrings {
+    return _vulnerableString;
+  }
+
+  set vulnerableStrings(String _vulnerableString) {
+    this._vulnerableString = _vulnerableString;
+  }
+
+  // _vulnerableString;
+  String get declarerStrings {
+    return _declarerString;
+  }
+
+  set declarerStrings(String _declarerString) {
+    this._declarerString = _declarerString;
+  }
+
   void resetVariable() {
     _totalScore = 0;
+    _resultContract = '';
+    _madeString = '';
+    _vulnerableString = '';
+    _declarerString = '';
 
-    isDouble = false;
-    isRedouble = false;
+    _isDouble = false;
+    _isRedouble = false;
 
     _isGame = false;
     _isSlam = false;
@@ -149,100 +222,123 @@ class Calculating {
     _underTrickPenalty = 0;
   }
 
-  void settings(int state) {
-    // //setting
-    // if (_questionIndex == 0) {
-    //   // contract = state;
-    //   if (contract == 6) {
-    //     _isSlam = true;
-    //   } else if (contract == 7) {
-    //     _isGrandSlam = true;
-    //   }
-    // } else if (_questionIndex == 1) {
-    //   if (state == 1) {
-    //     trump = 'C';
-    //     _isMinor = true;
-    //   } else if (state == 2) {
-    //     trump = 'D';
-    //     _isMinor = true;
-    //   } else if (state == 3) {
-    //     trump = 'H';
-    //     _isMajor = true;
-    //   } else if (state == 4) {
-    //     trump = 'S';
-    //     _isMajor = true;
-    //   } else if (state == 5) {
-    //     trump = 'NT';
-    //   }
-    // } else if (_questionIndex == 2) {
-    //   if (state == 1) isDouble = true;
-    //   if (state == 2) isRedouble = true;
-    // } else if (_questionIndex == 3) {
-    //   if (state == 1) _isVulnerable = true;
-    // } else if (_questionIndex == 4) {
-    //   // contract
-    //   _resultContract = contract.toString() + trump;
-    //   if (isDouble) _resultContract += 'x';
-    //   if (isRedouble) _resultContract += 'x';
-    //   if (isVulnerable)
-    //     _resultContract += ' (Vul)';
-    //   else
-    //     _resultContract += ' (Non-Vul)';
+  void settings() {
+    // contractValue
+    if (contractValue == 6) {
+      _isSlam = true;
+      _isGrandSlam = false;
+    } else if (contractValue == 7) {
+      _isSlam = false;
+      _isGrandSlam = true;
+    } else {
+      _isSlam = false;
+      _isGrandSlam = false;
+    }
 
-    //   //set state on game
-    //   made = state;
-    //   if (made < (_contract + 6))
-    //     _isPenalty = true;
-    //   else {
-    //     if (isRedouble || isDouble) {
-    //       if (_isMinor)
-    //         _level = 4;
-    //       else
-    //         _level = 7;
-    //     } else {
-    //       if (_isMinor)
-    //         _level = 1;
-    //       else if (_isMajor)
-    //         _level = 5;
-    //       else
-    //         _level = 9;
-    //     }
+    // trumpIndex
+    if (trumpIndex == 0 || trumpIndex == 1) {
+      _isMinor = true;
+      _isMajor = false;
+    } else if (trumpIndex == 2 || trumpIndex == 3) {
+      _isMinor = false;
+      _isMajor = true;
+    } else {
+      _isMinor = false;
+      _isMajor = false;
+    }
 
-    //     _biddingWeight = pow(2, contract) - contract + _level;
+    // doubleIndex
+    if (doubleIndex == 1) {
+      _isDouble = false;
+      _isRedouble = false;
+    } else if (doubleIndex == 1) {
+      _isDouble = true;
+      _isRedouble = false;
+    } else if (doubleIndex == 2) {
+      _isDouble = false;
+      _isRedouble = true;
+    }
 
-    //     if (isRedouble) {
-    //       if (6 <= _biddingWeight) {
-    //         _isGame = true;
-    //       }
-    //     } else if (isDouble) {
-    //       if (9 <= _biddingWeight) {
-    //         _isGame = true;
-    //       }
-    //     } else {
-    //       if (14 <= _biddingWeight) {
-    //         _isGame = true;
-    //       }
-    //     }
-    //   }
+    // vulnerableIndex
+    if (vulnerableIndex == 0)
+      _isVulnerable = false;
+    else
+      _isVulnerable = true;
+
+    // _resultContract
+    _resultContract =
+        '$contractValue' + '${trump[trumpIndex]}' + '${doubled[doubleIndex]}';
+
+    // _madeString
+    if (madeValue == (contractValue + 6))
+      _madeString = '=';
+    else {
+      _madeString = madeValue < (contractValue + 6)
+          ? '${madeValue - (contractValue + 6)}'
+          : '+' + '${madeValue - (contractValue + 6)}';
+    }
+
+    // _vulnerableString
+    _vulnerableString = '${vulnerable[vulnerableIndex]}';
+
+    // _declarerString
+    _declarerString = '${declarer[declarerIndex]}';
+
+    // isPenalty isGame
+    if (madeValue < (contractValue + 6)) {
+      _isPenalty = true;
+      _isGame = false;
+    } else {
+      _isPenalty = false;
+      if (!_isMajor && !_isMinor) {
+        _level = 7;
+      } else if (_isMajor) {
+        _level = 6;
+      } else if (_isMajor) {
+        _level = 4;
+      }
+
+      _biddingWeight = 2 * contractValue + _level;
+
+      if (_isRedouble) {
+        if (6 < _biddingWeight) {
+          _isGame = true;
+        } else {
+          _isGame = false;
+        }
+      } else if (_isDouble) {
+        if (9 < _biddingWeight) {
+          _isGame = true;
+        } else {
+          _isGame = false;
+        }
+      } else if (!_isRedouble && !_isDouble ){
+        if (12 < _biddingWeight) {
+          _isGame = true;
+        } else {
+          _isGame = false;
+        }
+      }
+    }
   }
 
-  void scoring() {
+  void calculating() {
     if (_isPenalty) {
       if (!_isVulnerable) {
-        if (!isDouble && !isRedouble) {
-          _underTrickPenalty = 50 + 50 * (contract + 6 - made - 1);
-        } else if (isDouble) {
-          _underTrickPenalty = 100 + 200 * (contract + 6 - made - 1);
-        } else if (isRedouble) {
-          _underTrickPenalty = 200 + 400 * (contract + 6 - made - 1);
+        if (!_isDouble && !_isRedouble) {
+          _underTrickPenalty = 50 + 50 * (contractValue + 6 - madeValue - 1);
+        } else if (_isDouble) {
+          _underTrickPenalty = 100 + 200 * (contractValue + 6 - madeValue - 1);
+        } else if (_isRedouble) {
+          _underTrickPenalty = 200 + 400 * (contractValue + 6 - madeValue - 1);
         }
       } else {
-        if (!isDouble && !isRedouble) {
-          _underTrickPenalty = 100 + 100 * (contract + 6 - made - 1);
-        } else if (isDouble) {
-          _underTrickPenalty = 200 + 300 * (contract + 6 - made - 1);
-        } else if (isRedouble) {
-          _underTrickPenalty = 400 + 600 * (contract + 6 - made - 1);
+        if (!_isDouble && !_isRedouble) {
+          _underTrickPenalty = 100 + 100 * (contractValue + 6 - madeValue - 1);
+        } else if (_isDouble) {
+          _underTrickPenalty = 200 + 300 * (contractValue + 6 - madeValue - 1);
+        } else if (_isRedouble) {
+          _underTrickPenalty = 400 + 600 * (contractValue + 6 - madeValue - 1);
         }
       } //Penalty
     } else {
@@ -255,9 +351,9 @@ class Calculating {
       } else {
         _contractPoint = 50;
       } //contract point
-      if (isDouble) {
+      if (_isDouble) {
         _doubleBonus = 50;
-      } else if (isRedouble) {
+      } else if (_isRedouble) {
         _doubleBonus = 100;
       } //double Bonus
       if (_isSlam) {
@@ -274,61 +370,74 @@ class Calculating {
         }
       } //slam Bonus
       if (_isMinor) {
-        if (!isDouble && !isRedouble) {
-          _contractPoint += 20 * (contract);
-        } else if (isDouble) {
-          _contractPoint += 40 * (contract);
-        } else if (isRedouble) {
-          _contractPoint += 80 * (contract);
+        if (!_isDouble && !_isRedouble) {
+          _contractPoint += 20 * (contractValue);
+        } else if (_isDouble) {
+          _contractPoint += 40 * (contractValue);
+        } else if (_isRedouble) {
+          _contractPoint += 80 * (contractValue);
         }
       } else if (_isMajor) {
-        if (!isDouble && !isRedouble) {
-          _contractPoint += 30 * (contract);
-        } else if (isDouble) {
-          _contractPoint += 60 * (contract);
-        } else if (isRedouble) {
-          _contractPoint += 120 * (contract);
+        if (!_isDouble && !_isRedouble) {
+          _contractPoint += 30 * (contractValue);
+        } else if (_isDouble) {
+          _contractPoint += 60 * (contractValue);
+        } else if (_isRedouble) {
+          _contractPoint += 120 * (contractValue);
         }
       } else if (!_isMinor && !_isMajor) {
-        if (!isDouble && !isRedouble) {
-          _contractPoint += 40 + 30 * (contract - 1);
-        } else if (isDouble) {
-          _contractPoint += 80 + 60 * (contract - 1);
-        } else if (isRedouble) {
-          _contractPoint += 160 + 120 * (contract - 1);
+        if (!_isDouble && !_isRedouble) {
+          _contractPoint += 40 + 30 * (contractValue - 1);
+        } else if (_isDouble) {
+          _contractPoint += 80 + 60 * (contractValue - 1);
+        } else if (_isRedouble) {
+          _contractPoint += 160 + 120 * (contractValue - 1);
         }
       } //contract bonus
       if (!_isVulnerable) {
-        if (!isDouble && !isRedouble) {
+        if (!_isDouble && !_isRedouble) {
           if (_isMinor) {
-            _overtrickPoint = 20 * (made - contract - 6);
+            _overtrickPoint = 20 * (madeValue - contractValue - 6);
           } else {
-            _overtrickPoint = 30 * (made - contract - 6);
+            _overtrickPoint = 30 * (madeValue - contractValue - 6);
           }
-        } else if (isDouble) {
-          _overtrickPoint = 100 * (made - contract - 6);
-        } else if (isRedouble) {
-          _overtrickPoint = 200 * (made - contract - 6);
+        } else if (_isDouble) {
+          _overtrickPoint = 100 * (madeValue - contractValue - 6);
+        } else if (_isRedouble) {
+          _overtrickPoint = 200 * (madeValue - contractValue - 6);
         }
       } else {
-        if (!isDouble && !isRedouble) {
+        if (!_isDouble && !_isRedouble) {
           if (_isMinor) {
-            _overtrickPoint = 20 * (made - contract - 6);
+            _overtrickPoint = 20 * (madeValue - contractValue - 6);
           } else {
-            _overtrickPoint = 30 * (made - contract - 6);
+            _overtrickPoint = 30 * (madeValue - contractValue - 6);
           }
-        } else if (isDouble) {
-          _overtrickPoint = 200 * (made - contract - 6);
-        } else if (isRedouble) {
-          _overtrickPoint = 400 * (made - contract - 6);
+        } else if (_isDouble) {
+          _overtrickPoint = 200 * (madeValue - contractValue - 6);
+        } else if (_isRedouble) {
+          _overtrickPoint = 400 * (madeValue - contractValue - 6);
         }
       } //over Trick Point
     }
+  }
+
+  void scoring() {
+    resetVariable();
+    settings();
+    calculating();
 
     _totalScore = _contractPoint +
         _slamBonus +
         _doubleBonus +
         _overtrickPoint -
         _underTrickPenalty;
+
+    print('');
+    print('declarer: $declarerStrings');
+    print('contract: $resultContracts');
+    print('vulnerable: $vulnerableStrings');
+    print('made: $madeStrings');
+    print('total score: $totalScores');
   }
 }

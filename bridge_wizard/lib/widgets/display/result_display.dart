@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../models/round.dart';
+import '../../models/calculator.dart';
+
 
 class ResultDisplay extends StatelessWidget {
   final List<Rounds> round;
+  final Calculator recentCalculator;
 
-  ResultDisplay(this.round);
+  ResultDisplay(this.round, this.recentCalculator);
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +92,7 @@ class ResultDisplay extends StatelessWidget {
                           Container(
                             width: 70,
                             child: Text(
-                              'E-W',
+                              '${recentCalculator.declarerStrings}',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
@@ -116,7 +119,7 @@ class ResultDisplay extends StatelessWidget {
                           Container(
                             width: 70,
                             child: Text(
-                              '5C',
+                              '${recentCalculator.resultContracts}',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
@@ -143,7 +146,7 @@ class ResultDisplay extends StatelessWidget {
                           Container(
                             width: 70,
                             child: Text(
-                              'Yes',
+                              '${recentCalculator.vulnerableStrings}',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
@@ -170,7 +173,7 @@ class ResultDisplay extends StatelessWidget {
                           Container(
                             width: 70,
                             child: Text(
-                              '-2',
+                              '${recentCalculator.madeStrings}',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
@@ -212,7 +215,7 @@ class ResultDisplay extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '200',
+                        '${recentCalculator.totalScores}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 100,

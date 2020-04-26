@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-//import '../display/made_display.dart';
+import '../../models/calculator.dart';
 
 class MadeEditor extends StatefulWidget {
+  final Calculator recentCalculator;
+  MadeEditor(this.recentCalculator);
+
   @override
   _MadeEditorState createState() => _MadeEditorState();
 }
 
 class _MadeEditorState extends State<MadeEditor> {
   int _made = 7;
-  // final MadeDisplay madeDisplay;
 
   void _madeIncrese() {
     setState(() {
       _made += 1;
-      
+      widget.recentCalculator.madeValues = _made;
     });
     
   }
@@ -21,9 +23,13 @@ class _MadeEditorState extends State<MadeEditor> {
   void _madeDecrese() {
     setState(() {
       _made -= 1;
-      // MadeDisplay(_made);
+      widget.recentCalculator.madeValues = _made;
     });
     
+  }
+
+  int get thisMade {
+    return _made;
   }
 
   @override

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './result_screen.dart';
-
-
+//import './result_screen.dart';
+import './models/calculator.dart';
 
 import './models/pair.dart';
 import './models/round.dart';
@@ -17,9 +16,9 @@ import './widgets/score_editor/trump_editor.dart';
 import './widgets/score_editor/double_editor.dart';
 import './widgets/score_editor/vulnerable_editor.dart';
 import './widgets/score_editor/made_editor.dart';
-import './widgets/confirm_button.dart';
+import './widgets/button/calculating_button.dart';
 
-class FirstRoute extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -62,7 +61,6 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
-
   final List<Rounds> _round = [
     Rounds(round: 3, table: 2, board: 15, teamNS: 't001', teamEW: 't002'),
   ];
@@ -71,7 +69,16 @@ class _CalculatorPageState extends State<CalculatorPage> {
     Pair(teamID: 't001', player1: 'John F. Kennedy', player2: 'Barack Obama'),
     Pair(teamID: 't002', player1: 'Vladimir Lenin', player2: 'Vladimir Putin'),
   ];
-  
+
+  Calculator cal = Calculator(
+    declarerIndex: 0,
+    contractValue: 1,
+    trumpIndex: 0,
+    doubleIndex: 0,
+    vulnerableIndex: 0,
+    madeValue: 7,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,17 +86,17 @@ class _CalculatorPageState extends State<CalculatorPage> {
         title: const Text(
           'Bridge Wizard beta',
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.arrow_forward),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SecondRoute()),
-              );
-            },
-          )
-        ],
+        // actions: <Widget>[
+        //   IconButton(
+        //     icon: Icon(Icons.arrow_forward),
+        //     onPressed: () {
+        //       Navigator.push(
+        //         context,
+        //         MaterialPageRoute(builder: (context) => SecondRoute()),
+        //       );
+        //     },
+        //   )
+        // ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -98,14 +105,13 @@ class _CalculatorPageState extends State<CalculatorPage> {
           children: <Widget>[
             RoundDisplay(_round, _team),
             // Summary(),
-            DeclarerEditor(),
-            ContractEditor(),
-            TrumpEditor(),
-            DoubleEditor(),
-            VulnerableEditor(),
-            MadeEditor(),
-            ConfirmButton(),
-            // MadeDisplay(1),
+            DeclarerEditor(cal),
+            ContractEditor(cal),
+            TrumpEditor(cal),
+            DoubleEditor(cal),
+            VulnerableEditor(cal),
+            MadeEditor(cal),
+            CalculatingButton(_round, cal),
           ],
         ),
       ),

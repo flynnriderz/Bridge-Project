@@ -13,6 +13,7 @@ class Summary extends StatefulWidget {
 
   // set contracts(int contract){
   //   this._contract = contract;
+  //   this._contract = contract;
   // }
   
   set mades(int made){

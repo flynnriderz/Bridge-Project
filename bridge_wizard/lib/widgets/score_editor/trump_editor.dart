@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import '../../models/calculator.dart';
 
 class TrumpEditor extends StatefulWidget {
+  final Calculator recentCalculator;
+  TrumpEditor(this.recentCalculator);
+
   @override
   _TrumpEditorState createState() => _TrumpEditorState();
 }
 
 class _TrumpEditorState extends State<TrumpEditor> {
-  List trump = ['Clubs', 'Diamonds', 'Hearts', 'Spades', 'No Trump'];
+  List _trump = ['Clubs', 'Diamonds', 'Hearts', 'Spades', 'No Trump'];
   int _index = 0;
 
   void _indexIncrese() {
     setState(() {
       _index += 1;
+      widget.recentCalculator.trumpIndexes = _index;
     });
     
   }
@@ -19,8 +24,13 @@ class _TrumpEditorState extends State<TrumpEditor> {
   void _indexDecrese() {
     setState(() {
       _index -= 1;
+      widget.recentCalculator.trumpIndexes = _index;
     });
     
+  }
+
+  int get thisIndex {
+    return _index;
   }
 
   @override
@@ -57,7 +67,7 @@ class _TrumpEditorState extends State<TrumpEditor> {
                     onPressed: _index <= 0 ? null : _indexDecrese,
                   ),
                   title: Text(
-                    '${trump[_index]}',
+                    '${_trump[_index]}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
