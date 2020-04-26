@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Section {
-  String title;
-  String type;
-  IconData icon;
+  String index;
+  String section_name;
 
-  Section({this.title, this.icon,this.type});
+  Section({this.index,this.section_name});
 }
-
-List<Section> sections = [
-  Section(title: 'Section', icon: Icons.dashboard,type: 'Pair'),
-];
+List<Section> index_section;

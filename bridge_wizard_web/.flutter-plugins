@@ -1,12 +1,12 @@
 # This is a generated file; do not edit or check into version control.
-cloud_firestore=C:\\Users\\user-t\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore-0.13.4\\
-cloud_firestore_web=C:\\Users\\user-t\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore_web-0.1.1+1\\
-firebase_core=C:\\Users\\user-t\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core-0.4.4+3\\
-firebase_core_web=C:\\Users\\user-t\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core_web-0.1.1+2\\
-flutter_keyboard_visibility=C:\\Users\\user-t\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_keyboard_visibility-0.7.0\\
-flutter_plugin_android_lifecycle=C:\\Users\\user-t\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-1.0.6\\
-image_picker=C:\\Users\\user-t\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\image_picker-0.6.3\\
-path_provider=C:\\Users\\user-t\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider-1.6.1\\
-url_launcher=C:\\Users\\user-t\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher-5.4.1\\
-url_launcher_macos=C:\\Users\\user-t\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher_macos-0.0.1+4\\
-url_launcher_web=C:\\Users\\user-t\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher_web-0.1.1+1\\
+cloud_firestore=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore-0.13.4\\
+cloud_firestore_web=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore_web-0.1.1+1\\
+firebase_core=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core-0.4.4+3\\
+firebase_core_web=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core_web-0.1.1+2\\
+flutter_keyboard_visibility=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_keyboard_visibility-0.7.0\\
+flutter_plugin_android_lifecycle=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-1.0.6\\
+image_picker=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\image_picker-0.6.3\\
+path_provider=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider-1.6.1\\
+url_launcher=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher-5.4.1\\
+url_launcher_macos=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher_macos-0.0.1+4\\
+url_launcher_web=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher_web-0.1.1+1\\

@@ -13,142 +13,238 @@ class ScoreWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 10,
-      shadowColor: Colors.grey,
-      borderRadius: BorderRadius.circular(4),
-      child: Container(
-        height: _media.height ,
-        width: _media.width /2 + 260,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: ListView(
-          children: <Widget>[
-            Stack(
+    return Scaffold(
+  body: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Positioned(
-                  top: 10,
-                  left: 20,
-                  child: Text(
-                    'Score',
-                    style: cardTitleTextStyle,
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 50.0, left: 20, right: 20),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          SizedBox(width: 2),
-                          Text(
-                            'Table',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          Text(
-                            'Round',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          Text(
-                            'Board',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          Text(
-                            'Declarer',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          Text(
-                            'Trump',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          Text(
-                            'Double',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          Text(
-                            'Re-Double',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          Text(
-                            'Score',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          Text(
-                            'Result',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Divider(),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: projectItems.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 18),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              textBaseline: TextBaseline.alphabetic,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    CircleAvatar(
-                                      child: Text(projectItems[index]
-                                          .assigned
-                                          .substring(0, 2)),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(projectItems[index].assigned),
-                                  ],
-                                ),
-                                Text(
-                                  projectItems[index].name,
-                                  textAlign: TextAlign.justify,
-                                ),
-                                Container(
-                                  child: Text(
-                                    projectItems[index].priority.index == 0
-                                        ? 'Low'
-                                        : projectItems[index].priority.index ==
-                                                1
-                                            ? 'Medium'
-                                            : 'High',
-                                    textAlign: TextAlign.justify,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  height: 30,
-                                  width: 80,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: projectItems[index].color,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                                Text(
-                                    '${projectItems[index].budget.toString()} K'),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+                  SingleChildScrollView(
+    scrollDirection: Axis.vertical,
+    child: FittedBox(
+      child: DataTable(
+        columns: <DataColumn>[
+          DataColumn(
+            label: Text('Table'),
+          ),
+          DataColumn(
+            label: Text('Status'),
+          ),
+        ],
+        rows: <DataRow>[
+          DataRow(cells: [
+            DataCell(Text('1')),
+            DataCell(Icon(
+    Icons.play_circle_filled,
+    size: 24,
+    color: Colors.green,
+  ),),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('2')),
+            DataCell(Icon(
+    Icons.play_circle_filled,
+    size: 24,
+    color: Colors.green,
+  ),),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('3')),
+            DataCell(Icon(
+    Icons.play_circle_filled,
+    size: 24,
+    color: Colors.green,
+  ),),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('4')),
+            DataCell(Icon(
+    Icons.pause_circle_filled,
+    size: 24,
+    color: Colors.red,
+  ),),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('5')),
+            DataCell(Icon(
+    Icons.play_circle_filled,
+    size: 24,
+    color: Colors.green,
+  ),),
+          ]),
+        ],
       ),
-    );
+    ),
+  ),
+  SizedBox( width: 20,),
+  SizedBox(
+    width: MediaQuery.of(context).size.width * 5 / 6,
+  child:SingleChildScrollView(
+    
+    scrollDirection: Axis.vertical,
+    child: FittedBox(
+      child: DataTable(
+        columns: <DataColumn>[
+          DataColumn(
+            label: Text('Table'),
+            
+          ),
+          DataColumn(
+            label: Text('Round'),
+          ),
+          DataColumn(
+            label: Text('NS_team'),
+          ),
+          DataColumn(
+            label: Text('EW_team'),
+          ),
+          DataColumn(
+            label: Text('Board'),
+          ),
+          DataColumn(
+            label: Text('Declaler'),
+          ),
+          DataColumn(
+            label: Text('Trump'),
+          ),
+          DataColumn(
+            label: Text('Double'),
+          ),
+          DataColumn(
+            label: Text('Vulrenable'),
+          ),
+          DataColumn(
+            label: Text('Score'),
+          ),
+        ],
+        rows: <DataRow>[
+          DataRow(cells: [
+            DataCell(Text('1')),
+            DataCell(Text('1')),
+            DataCell(Text('1')),
+            DataCell(Text('2')),
+            DataCell(Text('1')),
+            DataCell(Text('N')),
+            DataCell(Text('3NT')),
+            DataCell(Text('-')),
+            DataCell(Text('Yes')),
+            DataCell(Text('540')),
+            ]),
+          DataRow(cells: [
+            DataCell(Text('1')),
+            DataCell(Text('2')),
+            DataCell(Text('1')),
+            DataCell(Text('2')),
+            DataCell(Text('2')),
+            DataCell(Text('E')),
+            DataCell(Text('5S')),
+            DataCell(Text('-')),
+            DataCell(Text('NO')),
+            DataCell(Text('320')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('2')),
+            DataCell(Text('1')),
+            DataCell(Text('2')),
+            DataCell(Text('3')),
+            DataCell(Text('3')),
+            DataCell(Text('N')),
+            DataCell(Text('4H')),
+            DataCell(Text('X')),
+            DataCell(Text('Yes')),
+            DataCell(Text('354')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('2')),
+            DataCell(Text('2')),
+            DataCell(Text('2')),
+            DataCell(Text('3')),
+            DataCell(Text('4')),
+            DataCell(Text('E')),
+            DataCell(Text('5NT')),
+            DataCell(Text('X')),
+            DataCell(Text('Yes')),
+            DataCell(Text('840')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('3')),
+            DataCell(Text('1')),
+            DataCell(Text('3')),
+            DataCell(Text('4')),
+            DataCell(Text('5')),
+            DataCell(Text('S')),
+            DataCell(Text('6D')),
+            DataCell(Text('-')),
+            DataCell(Text('NO')),
+            DataCell(Text('-230')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('3')),
+            DataCell(Text('2')),
+            DataCell(Text('3')),
+            DataCell(Text('4')),
+            DataCell(Text('6')),
+            DataCell(Text('N')),
+            DataCell(Text('5NT')),
+            DataCell(Text('XX')),
+            DataCell(Text('NO')),
+            DataCell(Text('1080')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('4')),
+            DataCell(Text('1')),
+            DataCell(Text('4')),
+            DataCell(Text('5')),
+            DataCell(Text('7')),
+            DataCell(Text('W')),
+            DataCell(Text('5C')),
+            DataCell(Text('X')),
+            DataCell(Text('NO')),
+            DataCell(Text('-560')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('4')),
+            DataCell(Text('2')),
+            DataCell(Text('4')),
+            DataCell(Text('5')),
+            DataCell(Text('8')),
+            DataCell(Text('S')),
+            DataCell(Text('4H')),
+            DataCell(Text('-')),
+            DataCell(Text('Yes')),
+            DataCell(Text('640')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('5')),
+            DataCell(Text('1')),
+            DataCell(Text('5')),
+            DataCell(Text('6')),
+            DataCell(Text('9')),
+            DataCell(Text('E')),
+            DataCell(Text('4C')),
+            DataCell(Text('-')),
+            DataCell(Text('Yes')),
+            DataCell(Text('230')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('5')),
+            DataCell(Text('2')),
+            DataCell(Text('5')),
+            DataCell(Text('6')),
+            DataCell(Text('10')),
+            DataCell(Text('W')),
+            DataCell(Text('6D')),
+            DataCell(Text('-')),
+            DataCell(Text('Yes')),
+            DataCell(Text('1260')),
+          ]),
+        ],
+      ),
+    ),
+  ),
+  
+  )
+              ])
+);
   }
 }

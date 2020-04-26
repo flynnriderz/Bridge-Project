@@ -1,6 +1,9 @@
 import 'dart:html';
 
 
+import 'package:bridge_wizard_web/src/widget/create_section.dart';
+import 'package:bridge_wizard_web/src/data/tournament_entry_model.dart';
+import 'package:bridge_wizard_web/src/data/section_entry_model.dart';
 import 'package:firebase/firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +12,6 @@ import 'package:bridge_wizard_web/src/model/menu.dart';
 import 'package:bridge_wizard_web/src/model/section.dart';
 import 'package:bridge_wizard_web/src/widget/card_tile.dart';
 import 'package:bridge_wizard_web/src/widget/chart_card_tile.dart';
-import 'package:bridge_wizard_web/src/widget/comment_widget.dart';
 import 'package:bridge_wizard_web/src/widget/profile_Widget.dart';
 import 'package:bridge_wizard_web/src/widget/score_widget.dart';
 import 'package:bridge_wizard_web/src/widget/quick_contact.dart';
@@ -21,19 +23,48 @@ import 'package:bridge_wizard_web/src/widget/section.dart';
 import 'package:firebase/firebase.dart' ;
 import 'package:cloud_firestore/cloud_firestore.dart' as db ;
 
+
+String sectionID="";
+String sectionname="";
 int state=0;
-class MainPage extends StatefulWidget {    
- @override    
+class MainPage extends StatefulWidget { 
+ @override   
+  
  _MainPage createState() => _MainPage();    
 }    
-     
-class _MainPage extends State<MainPage> {       
+
+class _MainPage extends State<MainPage>  {       
      
  @override    
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
+    List b=[];
+    String messages = "Copy of message body below: \n"; 
+    _getAllMessages() async {
+   db.Firestore.instance
+   .collection('/Tournament')
+   .snapshots()
+    .listen((data) =>
+        data.documents.forEach((doc) =>
+        messages+"1"));
+  }
+  
+  _getAllMessages();
+  
+  print(messages);
+  //   _getAllMessages() async {
+        
+  //  String messages = "Copy of message body below: \n";  
+  // db.Firestore.instance
+  //   .collection('/Tournament')
+  //   .snapshots()
+  //   .listen((data) =>
+  //       data.documents.forEach((doc) =>
+  //       b.add(1)));
+  // }
+    
     final _media = MediaQuery.of(context).size;
-    print(_media);
-    return LayoutBuilder(
+    
+    return  LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
           return Material(
             child: Row(
@@ -65,8 +96,20 @@ class _MainPage extends State<MainPage> {
                         ),
                       ),
                       Expanded(
-                        child: ListView(
-                          
+                        child: StreamBuilder(
+                  stream: db.Firestore.instance
+                      .collection("Tournament").snapshots(),
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.waiting:
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      default:
+                        List rev = snapshot.data.documents.reversed.toList();
+                        TournamentEntry tournament = TournamentEntry.fromDoc(rev[selectedIndex]);
+                        return ListView(
                           padding: EdgeInsets.only(
                               top: 20, left: 20, right: 20, bottom: 20),
                           children: <Widget>[
@@ -75,7 +118,7 @@ class _MainPage extends State<MainPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Column(
+                                  if(tournamentID!="")Column(
                                     children: <Widget>[
                                       IntrinsicHeight(
                                         child: Row(
@@ -87,11 +130,12 @@ class _MainPage extends State<MainPage> {
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 ChartCardTile(
+                                                  
                                                   cardColor: Colors.orange,
-                                                  cardTitle: menuItems[selectedIndex].title,
-                                                  subText: '',
+                                                  cardTitle: "Tournament  "+tournament.name,
+                                                  subText: 'Director  '+tournament.director_name,
                                                   icon: Icons.history,
-                                                  typeText: 'Location : '+menuItems[selectedIndex].location,
+                                                  typeText: "Location  "+tournament.location,
                                                 ),
                                               ],
                                             ),
@@ -116,8 +160,25 @@ class _MainPage extends State<MainPage> {
                               ),
                             ),
 
-
-                            IntrinsicHeight(
+                          if(tournamentID!="") StreamBuilder(
+                  stream: db.Firestore.instance
+                      .collection("Tournament").document(tournamentID).collection("Section").snapshots(),
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.waiting:
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      default:
+                        List rev = snapshot.data.documents.reversed.toList();
+                        List<SectionEntry> sections=[];
+                        if (rev != null)
+                        for (var section in rev){
+                          sections.add(SectionEntry.fromDoc(section));
+                        }
+                        
+                        return IntrinsicHeight(
                                 child: DataTable(
                                 sortAscending: true,
                                 sortColumnIndex: 0,
@@ -130,7 +191,7 @@ class _MainPage extends State<MainPage> {
                                         style: TextStyle(
                                             fontSize: 20, fontWeight: FontWeight.w900),
                                       ),
-                                      tooltip: "Student USN Number"
+                                      
                                       ),
                                       
                                   DataColumn(
@@ -138,31 +199,58 @@ class _MainPage extends State<MainPage> {
                                     "Type",
                                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                                   )),
+                                  DataColumn(
+                                    label: Text("DELETE",style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+                                  )
                                 ],
                                 rows: [
+                                  
+                                  for (var section in sections)
                                   DataRow(
                                     cells: [
-                                      DataCell(Text(menuItems[selectedIndex].section.title), showEditIcon: false),
-                                      DataCell(Text(menuItems[selectedIndex].section.type)),
-                                    ],
-                                    
-                                    selected: false,
-                                     onSelectChanged: (bool selected) {
-                                      if (selected) {
-                                          Navigator.push(context, MaterialPageRoute(
+                                      DataCell(Text(section.section_name), showEditIcon: false,onTap: () {
+                                        sectionname=section.section_name;
+                              sectionID=section.documentId;
+                              Navigator.push(context, MaterialPageRoute(
                                               builder: (context)=> TabsNonScrollableDemo()));
-                                      }
-                                  },
+                            }),
+                                      DataCell(Text(section.type),onTap: () {
+                                        sectionname=section.section_name;
+                              sectionID=section.documentId;
+                              Navigator.push(context, MaterialPageRoute(
+                                              builder: (context)=> TabsNonScrollableDemo()));
+                            }),
+                            DataCell(IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                sectionname=section.section_name;
+                                  sectionID=section.documentId;
+                                  _asyncConfirmDialog(context);
+                              },
+                            ))
+                                    ],
                                   ),
                                   
                                 ],
                               ),
-                            ),
+                            );
+
+                    }})
                           ],
 
-
-                        ),
-                      ),
+                        )
+                        ;
+                    }}
+                      ),)
+                      ,
+                      if(tournamentID!="")Center(child: FloatingActionButton(
+        elevation: 1.5,
+        onPressed: () => Navigator.push(context, MaterialPageRoute(
+                        builder: (context)=> CreateSection())),
+        tooltip: 'Create Section',
+        child: Icon(Icons.add),
+        backgroundColor: Theme.of(context).colorScheme.secondary),)
+      
                     ],
                   ),
                 ),
@@ -174,205 +262,39 @@ class _MainPage extends State<MainPage> {
     );
   }
 }
+enum ConfirmAction { CANCEL, ACCEPT }
 
-// padding: EdgeInsets.only(
-//                               top: 20, left: 20, right: 20, bottom: 20),
-//                           children: <Widget>[
-//                             IntrinsicHeight(
-//                               child: Row(
-//                                 mainAxisAlignment: MainAxisAlignment.start,
-//                                 crossAxisAlignment: CrossAxisAlignment.start,
-//                                 children: <Widget>[
-//                                   Column(
-//                                     children: <Widget>[
-//                                       IntrinsicHeight(
-//                                         child: Row(
-//                                           children: <Widget>[
-//                                             Row(
-//                                               mainAxisAlignment:
-//                                                   MainAxisAlignment.start,
-//                                               crossAxisAlignment:
-//                                                   CrossAxisAlignment.start,
-//                                               children: <Widget>[
-//                                                 ChartCardTile(
-//                                                   cardColor: Colors.orange,
-//                                                   cardTitle: 'Tournament',
-//                                                   subText: '@ECC',
-//                                                   icon: Icons.history,
-//                                                   typeText: 'Tour 1',
-//                                                 ),
-//                                                 SizedBox(
-//                                                   width: 20,
-//                                                 ),
-//                                                 ChartCardTile(
-//                                                   cardColor: Color(0xFF25C6DA),
-//                                                   cardTitle: 'Section',
-//                                                   subText: '@811',
-//                                                   icon: Icons.home,
-//                                                   typeText: 'Kmitl Free Time',
-//                                                 ),
-//                                               ],
-//                                             ),
-//                                             SizedBox(
-//                                               height: 20,
-//                                             ),
-//                                           ],
-//                                         ),
-//                                       ),
-//                                       SizedBox(
-//                                               height: 20,
-//                                             ),
-//                                       IntrinsicHeight(
-                                        
-//                                         child: Row(
-//                                           mainAxisAlignment:
-//                                               MainAxisAlignment.start,
-//                                           crossAxisAlignment:
-//                                               CrossAxisAlignment.stretch,
-//                                           children: <Widget>[
-//                                             RaisedButton(
-//                                             color: Color(0xff7560ED),
-//                                             shape: RoundedRectangleBorder(
-//                                               borderRadius: BorderRadius.circular(20),
-//                                             ),
-//                                             onPressed: () => state=1,
-//                                             child: Text(
-//                                               '   Detail   ',
-//                                               style: TextStyle(
-//                                                 color: Colors.white,
-//                                                 fontSize: 30,
-//                                               ),
-//                                             ),
-//                                           ),
-//                                             SizedBox(width: 20),
-//                                             RaisedButton(
-//                                             color: Color(0xff7560ED),
-//                                             shape: RoundedRectangleBorder(
-//                                               borderRadius: BorderRadius.circular(20),
-//                                             ),
-//                                             onPressed: () => Navigator.push(context, MaterialPageRoute(
-//                                               builder: (context)=> TabsNonScrollableDemo())),
-//                                             child: Text(
-//                                               '   Score    ',
-//                                               style: TextStyle(
-//                                                 color: Colors.white,
-//                                                 fontSize: 30,
-//                                               ),
-//                                             ),
-//                                           ),
-//                                             SizedBox(width: 20),
-//                                             RaisedButton(
-//                                             color: Color(0xff7560ED),
-//                                             shape: RoundedRectangleBorder(
-//                                               borderRadius: BorderRadius.circular(20),
-//                                             ),
-//                                             onPressed: () => print('follow'),
-//                                             child: Text(
-//                                               ' Player List ',
-//                                               style: TextStyle(
-//                                                 color: Colors.white,
-//                                                 fontSize: 30,
-//                                               ),
-//                                             ),
-//                                           ),
-//                                             SizedBox(width: 20),
-//                                             RaisedButton(
-//                                             color: Color(0xff7560ED),
-//                                             shape: RoundedRectangleBorder(
-//                                               borderRadius: BorderRadius.circular(20),
-//                                             ),
-//                                             onPressed: () => print('follow'),
-//                                             child: Text(
-//                                               '   Result   ',
-//                                               style: TextStyle(
-//                                                 color: Colors.white,
-//                                                 fontSize: 30,
-//                                               ),
-//                                             ),
-//                                           ),
-//                                             SizedBox(width: 20),
-//                                             RaisedButton(
-//                                             color: Color(0xff7560ED),
-//                                             shape: RoundedRectangleBorder(
-//                                               borderRadius: BorderRadius.circular(20),
-//                                             ),
-//                                             onPressed: () => print('follow'),
-//                                             child: Text(
-//                                               '   Back   ',
-//                                               style: TextStyle(
-//                                                 color: Colors.white,
-//                                                 fontSize: 30,
-//                                               ),
-//                                             ),
-//                                           ),
-//                                           ],
-//                                         ),
-//                                       ),
-//                                       SizedBox(
-//                                         height: 20,
-//                                       ),
-//                                       IntrinsicHeight(
-//                                         child: Row(
-//                                           children: <Widget>[
-//                                             Column(
-//                                               mainAxisAlignment:
-//                                                   MainAxisAlignment.start,
-//                                               crossAxisAlignment:
-//                                                   CrossAxisAlignment.start,
-//                                               // children: <Widget>[
-//                                               //   ChartCardTile(
-//                                               //     cardColor: Color(0xFF7560ED),
-//                                               //     cardTitle: 'Bandwidth usage',
-//                                               //     subText: 'March 2017',
-//                                               //     icon: Icons.pie_chart,
-//                                               //     typeText: '50 GB',
-//                                               //   ),
-//                                               //   SizedBox(
-//                                               //     height: 20,
-//                                               //   ),
-//                                               //   ChartCardTile(
-//                                               //     cardColor: Color(0xFF25C6DA),
-//                                               //     cardTitle: 'Download count',
-//                                               //     subText: 'March 2017',
-//                                               //     icon: Icons.cloud_upload,
-//                                               //     typeText: '35487',
-//                                               //   ),
-//                                               // ],
-//                                             ),
-//                                             SizedBox(
-//                                               width: 20,
-//                                             ),
-//                                             if(state==0)                                
-//                                               ScoreWidget(media: _media)
-//                                               else if(state==1)
-//                                               ProfileWidget(media: _media)
-//                                           ],
-//                                         ),
-//                                       ),
-//                                       SizedBox(
-//                                         height: 20,
-//                                       ),
-//                                     ],
-//                                   ),
-//                                   SizedBox(
-//                                     width: 10,
-//                                   ),
-//                                   // QuickContact(media: _media)
-//                                 ],
-//                               ),
-//                             ),
-//                             // IntrinsicHeight(
-//                             //   child: Row(
-//                             //     crossAxisAlignment: CrossAxisAlignment.stretch,
-//                             //     mainAxisAlignment: MainAxisAlignment.start,
-//                             //     children: <Widget>[
-//                             //       CommentWidget(media: _media),
-//                             //       SizedBox(
-//                             //         width: 20,
-//                             //       ),
-//                             //       ProfileWidget(media: _media),
-//                             //     ],
-//                             //   ),
-//                             // ),
-//                             // SizedBox(height: 20),
-//                           ],
+Future<ConfirmAction> _asyncConfirmDialog(BuildContext context) async {
+  return showDialog<ConfirmAction>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Do you want to delete '+sectionname+'?'),
+        content: const Text(
+            'This will delete all data in your section.'),
+        actions: <Widget>[
+          FlatButton(
+            child: const Text('CANCEL'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.CANCEL);
+            },
+          ),
+          FlatButton(
+            child: const Text('ACCEPT'),
+            onPressed: () {
+              db.Firestore.instance
+                  .collection("Tournament")
+                  .document(tournamentID)
+                  .collection("Section")
+                  .document(sectionID)
+                  .delete();
+              Navigator.of(context).pop(ConfirmAction.ACCEPT);
+            },
+          )
+        ],
+      );
+    },
+  );
+}
+  

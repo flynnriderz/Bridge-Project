@@ -1,5 +1,9 @@
 import 'dart:html';
-
+import 'dart:math';
+import 'package:bridge_wizard_web/src/data/section_entry_model.dart';
+import 'package:bridge_wizard_web/src/model/menu.dart';
+import 'package:bridge_wizard_web/src/widget/sidebar_menu..dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';    
 import 'package:flutter_form_builder/flutter_form_builder.dart';    
 import 'package:intl/intl.dart';  
@@ -12,11 +16,10 @@ class CreateSection extends StatefulWidget {
 }    
      
 class _CreateSection extends State<CreateSection> {    
- var data;    
  bool autoValidate = true;    
  bool readOnly = false;    
  bool showSegmentedControl = true;    
- final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();    
+ final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();   
      
  @override    
  Widget build(BuildContext context) {    
@@ -39,9 +42,10 @@ class _CreateSection extends State<CreateSection> {
                autovalidate: true,    
                child: Column(    
                  children: <Widget>[    
-                   FormBuilderTextField(    
+                   FormBuilderTextField(   
                      attribute: 'Section',    
                      validators: [FormBuilderValidators.required()],    
+                     
                      decoration: InputDecoration(labelText: "Section name"),    
                    ),    
                    FormBuilderDropdown(    
@@ -56,7 +60,7 @@ class _CreateSection extends State<CreateSection> {
                          .toList(),    
                    ),
 
-                   FormBuilderTextField(    
+                   FormBuilderTextField(   
                      attribute: 'table',    
                      validators: [FormBuilderValidators.required()],
                      
@@ -189,13 +193,33 @@ class _CreateSection extends State<CreateSection> {
                    child: Text("Submit"),    
                    onPressed: () {    
                      _fbKey.currentState.save();    
+                      var section = _fbKey.currentState.value.values.toList();
+                      var rng = new Random();
                      if (_fbKey.currentState.validate()) { 
+                        final data = SectionEntry(
+                        board : section[5],
+                        board_round : section[6],
+                        key : rng.nextInt(9999).toString(),
+                        movement : section[7],
+                        pin : rng.nextInt(9999).toString(),
+                        section_name : section[2],
+                        table : section[4],
+                        time : "20",
+                        type : section[3],
+                        documentId : section[2],
+                      ).toMap();
+
+                       Firestore.instance
+                       .collection('Tournament')
+                       .document(tournamentID)
+                       .collection('Section')
+                       .add(data);
                        print(_fbKey.currentState.value);
                       //  Navigator.push(context, MaterialPageRoute(
                       //   builder: (context)=> confirmCreate()));    
                       Navigator.pop(context);
-                      Navigator.pop(context);
-                     }    
+                     }   
+                     else print(_fbKey.currentState.value); 
                    },    
                  ),    
                  MaterialButton(    

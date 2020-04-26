@@ -5,9 +5,12 @@
 import 'package:flutter/material.dart';
 import 'package:bridge_wizard_web/src/model/menu.dart';
 import 'package:bridge_wizard_web/src/widget/sidebar_menu..dart';
-import 'package:bridge_wizard_web/src/widget/profile_Widget.dart';
+import 'package:bridge_wizard_web/src/widget/result_widget.dart';
 import 'package:bridge_wizard_web/src/widget/score_widget.dart';
 import 'package:bridge_wizard_web/src/commons/theme.dart';
+import 'package:bridge_wizard_web/src/widget/detail_widget.dart';
+import 'package:bridge_wizard_web/src/competitor/player_page.dart';
+import 'package:bridge_wizard_web/src/pages/main_page.dart';
 
 class TabsNonScrollableDemo extends StatefulWidget {
   @override
@@ -30,7 +33,7 @@ class _TabsNonScrollableDemo extends State<TabsNonScrollableDemo>{
           backgroundColor: drawerBgColor,
           automaticallyImplyLeading: true,
           title:
-              Text(menuItems[selectedIndex].section.title),
+              Text(sectionname),
           bottom: TabBar(
             isScrollable: false,
             tabs: [
@@ -40,10 +43,10 @@ class _TabsNonScrollableDemo extends State<TabsNonScrollableDemo>{
         ),
         body: TabBarView(
           children: [
-            ProfileWidget(media: _media),
+            DetailPage(),
             ScoreWidget(media: _media,),
-            ProfileWidget(media: _media),
-            ScoreWidget(media: _media,),
+            PlayerDetail(),
+            ResultPage(),
           ],
         ),
       ),
