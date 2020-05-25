@@ -1,230 +1,196 @@
 import 'package:flutter/material.dart';
-import '../../models/round.dart';
-import '../../models/calculator.dart';
-
+//import '../../models/round.dart';
+import '../../methods/calculator.dart';
 
 class ResultDisplay extends StatelessWidget {
-  final List<Rounds> round;
   final Calculator recentCalculator;
 
-  ResultDisplay(this.round, this.recentCalculator);
+  ResultDisplay(this.recentCalculator);
 
   @override
   Widget build(BuildContext context) {
+    final double font = 20;
+    final double firstWidth = 130;
+    final double secondWidth = 70;
     return Container(
+      height: MediaQuery.of(context).size.height * 0.5,
       child: Column(
-        children: <Widget>[
+        children: [
           Card(
-            elevation: 6,
-            margin: EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 15,
+            elevation: 4,
+            margin: EdgeInsets.all(10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Text(
-                        'Table: ${round[0].table}',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: firstWidth,
+                      child: Text(
+                        'Declarer:',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: Colors.grey,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        'Round: ${round[0].round}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: Colors.grey,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        'Board: ${round[0].board}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: Colors.grey,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Card(
-            elevation: 6,
-            margin: EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 15,
-            ),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(5),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            width: 150,
-                            child: Text(
-                              'Declarer:',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 70,
-                            child: Text(
-                              '${recentCalculator.declarerStrings}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            width: 150,
-                            child: Text(
-                              'Contract:',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 70,
-                            child: Text(
-                              '${recentCalculator.resultContracts}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            width: 150,
-                            child: Text(
-                              'Vulnerable:',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 70,
-                            child: Text(
-                              '${recentCalculator.vulnerableStrings}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            width: 150,
-                            child: Text(
-                              'Made:',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 70,
-                            child: Text(
-                              '${recentCalculator.madeStrings}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Card(
-            elevation: 6,
-            margin: EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 15,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(5),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          'Total Score (for Non Declarer):',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        '${recentCalculator.totalScores}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 100,
+                          fontSize: font,
                           color: Colors.black87,
                         ),
+                      ),
+                    ),
+                    Container(
+                      width: secondWidth,
+                      child: Text(
+                        '${recentCalculator.declarerStrings}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: font,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: firstWidth,
+                      child: Text(
+                        'Contract:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: font,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: secondWidth,
+                      child: Text(
+                        '${recentCalculator.resultContracts}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: font,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: firstWidth,
+                      child: Text(
+                        'Vulnerable:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: font,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: secondWidth,
+                      child: Text(
+                        '${recentCalculator.vulnerableStrings}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: font,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: firstWidth,
+                      child: Text(
+                        'Made:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: font,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: secondWidth,
+                      child: Text(
+                        '${recentCalculator.madeStrings}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: font,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.height * 0.1,
+          ),
+          Card(
+            elevation: 4,
+            margin: EdgeInsets.all(10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: Column(
+                    children: [
+                      Text(
+                        'Total Score',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: font,
+                          color: Colors.black54,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        'for ' +
+                            (recentCalculator.totalScores < 0
+                                ? recentCalculator.nonDeclarers
+                                : recentCalculator.declarers),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: font - 4,
+                          color: Colors.black54,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ],
                   ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: Text(
+                    '${recentCalculator.totalScores.abs()}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 100,
+                      color: Colors.black87,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.height * 0.1,
                 ),
               ],
             ),

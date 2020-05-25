@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/calculator.dart';
+import '../../methods/calculator.dart';
 
 class TrumpEditor extends StatefulWidget {
   final Calculator recentCalculator;
@@ -45,7 +45,7 @@ class _TrumpEditorState extends State<TrumpEditor> {
             child: Card(
               child: Center(
                 child: const Text(
-                  'trump',
+                  'Trump',
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black87,

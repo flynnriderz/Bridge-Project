@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/calculator.dart';
+import '../../methods/calculator.dart';
 
 class DeclarerEditor extends StatefulWidget {
   final Calculator recentCalculator;
@@ -41,7 +41,7 @@ class _DeclarerEditorState extends State<DeclarerEditor> {
             child: Card(
               child: Center(
                 child: const Text(
-                  'declarer',
+                  'Declarer',
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black87,

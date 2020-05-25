@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/calculator.dart';
+import '../../methods/calculator.dart';
 
 class MadeEditor extends StatefulWidget {
   final Calculator recentCalculator;
@@ -42,15 +42,14 @@ class _MadeEditorState extends State<MadeEditor> {
             width: 100,
             height: 60,
             child: Card(
-              color: Colors.black54,
+              color: Colors.black38,
               child: Center(
                 child: const Text(
-                  'made',
+                  'Made',
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
                   ),
-                  
                 ),
               ),
             ),
@@ -60,7 +59,7 @@ class _MadeEditorState extends State<MadeEditor> {
             child: Container(
               height: 60,
               child: Card(
-                color: Colors.black54,
+                color: Colors.black38,
                 child: ListTile(
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios),

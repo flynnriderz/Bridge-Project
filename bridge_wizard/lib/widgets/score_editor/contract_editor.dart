@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/calculator.dart';
+import '../../methods/calculator.dart';
 
 class ContractEditor extends StatefulWidget {
   final Calculator recentCalculator;
@@ -39,7 +39,7 @@ class _ContractEditorState extends State<ContractEditor> {
             child: Card(
               child: Center(
                 child: const Text(
-                  'contract',
+                  'Contract',
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black87,

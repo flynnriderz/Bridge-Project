@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 class Rounds{
+  final String competitionID;
   final int round;
-  final int table;
-  final int board;
+  final String table;
+  final List board;
   final String teamNS;
   final String teamEW;
-  int teamNSScore;
-  int teamEWScore;
+  // int teamNSScore;
+  // int teamEWScore;
 
-  Rounds({
+  const Rounds({
+    @required this.competitionID,
     @required this.round,
     @required this.table,
     @required this.board,
@@ -18,19 +20,19 @@ class Rounds{
     @required this.teamEW,
   });
 
-  int get teamNSScores{
-    return teamNSScore;
-  }
+  // int get teamNSScores{
+  //   return teamNSScore;
+  // }
 
-  set teamNSScores(int teamNSScore){
-    this.teamNSScore = teamNSScore;
-  }
+  // set teamNSScores(int teamNSScore){
+  //   this.teamNSScore = teamNSScore;
+  // }
 
-  int get teamEWScores{
-    return teamNSScore;
-  }
+  // int get teamEWScores{
+  //   return teamNSScore;
+  // }
 
-  set teamEWScores(int teamEWScore){
-    this.teamEWScore = teamEWScore;
-  }
+  // set teamEWScores(int teamEWScore){
+  //   this.teamEWScore = teamEWScore;
+  // }
 }

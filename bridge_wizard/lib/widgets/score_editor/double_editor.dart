@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/calculator.dart';
+import '../../methods/calculator.dart';
 
 class DoubleEditor extends StatefulWidget {
   final Calculator recentCalculator;
@@ -45,7 +45,7 @@ class _DoubleEditorState extends State<DoubleEditor> {
             child: Card(
               child: Center(
                 child: const Text(
-                  'doubled',
+                  'Doubled',
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black87,

@@ -1,15 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 
-class Pair{
-  final String teamID;
-  String player1;
-  String player2;
 
-  Pair({
-    @required this.teamID,
-    this.player1,
-    this.player2,
+class Pairs{
+  final String pairID;
+  final String player1;
+  final String player2;
+
+  const Pairs({
+    @required this.pairID,
+    this.player1 = '-',
+    this.player2 = '-',
   });
 }

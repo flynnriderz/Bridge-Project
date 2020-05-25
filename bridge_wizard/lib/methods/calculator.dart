@@ -1,54 +1,61 @@
 
-// import 'package:flutter/cupertino.dart';
-
 class Calculator {
   int declarerIndex;
   int contractValue;
   int trumpIndex;
   int doubleIndex;
-  int vulnerableIndex;
   int madeValue;
+
+  int _vulnerableIndex = 0;
+  int _rollboard = 0;
 
   int _contractPoint = 0;
   int _overtrickPoint = 0;
   int _slamBonus = 0;
   int _doubleBonus = 0;
-  int _underTrickPenalty = 0; ////////////////////////
+  int _underTrickPenalty = 0; 
 
   String _resultContract = '';
   String _madeString = '';
   String _vulnerableString = '';
   String _declarerString = '';
-  int _totalScore = 0; ////////////////////////
+  String _declarer = '';
+  String _nonDeclarer = '';
+  int _totalScore = 0; 
 
   bool _isDouble = false;
-  bool _isRedouble = false; ////////////////////////
+  bool _isRedouble = false; 
 
   bool _isGame = false;
   bool _isSlam = false;
-  bool _isGrandSlam = false; ////////////////////////
+  bool _isGrandSlam = false; 
   bool _isMinor = false;
-  bool _isMajor = false; ////////////////////////
-  bool _isVulnerable = false; ////////////////////////
-  bool _isPenalty = false; ////////////////////////
+  bool _isMajor = false; 
+  bool _isVulnerable = false; 
+  bool _isPenalty = false; 
 
   int _level = 0;
-  int _biddingWeight = 0; ////////////////////////
+  int _biddingWeight = 0; 
+
   List declarer = ['N', 'E', 'S', 'W'];
   List doubled = ['', 'x', 'xx'];
   List trump = ['C', 'D', 'H', 'S', 'NT'];
-  List vulnerable = ['No', 'Yes'];
+  List vulnerable = [
+    ['No', 'No'],
+    ['Yes', 'No'],
+    ['No', 'Yes'],
+    ['Yes', 'Yes']
+  ];
 
   Calculator({
     this.declarerIndex,
     this.contractValue,
     this.trumpIndex,
     this.doubleIndex,
-    this.vulnerableIndex,
     this.madeValue,
   });
 
-  // --------------------------------------------------------unnessesary
+  // --------------------unnessesary begin--------------------
   // int get contractPoints {
   //   return _contractPoint;
   // }
@@ -96,15 +103,11 @@ class Calculator {
   // set resultContracts(String resultContract) {
   //   this._resultContract = resultContract;
   // }
-  //--------------------------------------------------------unnessesary end
+  //--------------------unnessesary end--------------------
 
   // _totalScore;
   int get totalScores {
     return _totalScore;
-  }
-
-  set totalScores(int totalScore) {
-    this._totalScore = totalScore;
   }
 
   // declarerIndex;
@@ -143,15 +146,6 @@ class Calculator {
     this.doubleIndex = doubleIndex;
   }
 
-  // vulnerableIndex;
-  int get vulnerableIndexes {
-    return vulnerableIndex;
-  }
-
-  set vulnerableIndexes(int vulnerableIndex) {
-    this.vulnerableIndex = vulnerableIndex;
-  }
-
   // madeValue;
   int get madeValues {
     return madeValue;
@@ -175,29 +169,37 @@ class Calculator {
     return _madeString;
   }
 
-  set madeStrings(String _madeString) {
-    this._madeString = _madeString;
-  }
-
   // _vulnerableString;
   String get vulnerableStrings {
     return _vulnerableString;
   }
 
-  set vulnerableStrings(String _vulnerableString) {
-    this._vulnerableString = _vulnerableString;
-  }
-
-  // _vulnerableString;
+  // _declarerString;
   String get declarerStrings {
     return _declarerString;
   }
 
-  set declarerStrings(String _declarerString) {
-    this._declarerString = _declarerString;
+  // _nonDeclarer;
+  String get declarers {
+    return _declarer;
+  }
+
+  // _nonDeclarer;
+  String get nonDeclarers {
+    return _nonDeclarer;
+  }
+
+  int adjustRotate(int rotate) {
+    if (rotate > 16)
+      return adjustRotate(rotate - 16);
+    else
+      return rotate;
   }
 
   void resetVariable() {
+    _vulnerableIndex = 0;
+    _rollboard = 0;
+
     _totalScore = 0;
     _resultContract = '';
     _madeString = '';
@@ -222,8 +224,13 @@ class Calculator {
     _underTrickPenalty = 0;
   }
 
-  void settings() {
-    // contractValue
+  void setDeclarer() {
+    _declarerString = '${declarer[declarerIndex]}';
+    _declarer = declarerIndex % 2 == 0 ? 'North - South' : 'East - West' ;
+    _nonDeclarer = declarerIndex % 2 == 0 ? 'East - West' : 'North - South' ;
+  }
+
+  void setContract() {
     if (contractValue == 6) {
       _isSlam = true;
       _isGrandSlam = false;
@@ -234,8 +241,9 @@ class Calculator {
       _isSlam = false;
       _isGrandSlam = false;
     }
+  }
 
-    // trumpIndex
+  void setTrump() {
     if (trumpIndex == 0 || trumpIndex == 1) {
       _isMinor = true;
       _isMajor = false;
@@ -246,8 +254,9 @@ class Calculator {
       _isMinor = false;
       _isMajor = false;
     }
+  }
 
-    // doubleIndex
+  void setDouble() {
     if (doubleIndex == 1) {
       _isDouble = false;
       _isRedouble = false;
@@ -258,18 +267,21 @@ class Calculator {
       _isDouble = false;
       _isRedouble = true;
     }
+  }
 
-    // vulnerableIndex
-    if (vulnerableIndex == 0)
-      _isVulnerable = false;
-    else
-      _isVulnerable = true;
+  void setVul(int currentBoard) {
+    _vulnerableIndex = declarerIndex % 2 == 0 ? 0 : 1;
+    _isVulnerable = _vulnerableIndex == 0 ? false : true;
+    _rollboard = adjustRotate(((adjustRotate(currentBoard) - 1) ~/ 4) + ((adjustRotate(currentBoard) - 1) % 4));
+    _vulnerableString = '${vulnerable[_rollboard][_vulnerableIndex]}';
+  }
 
-    // _resultContract
+  void setResultContract() {
     _resultContract =
         '$contractValue' + '${trump[trumpIndex]}' + '${doubled[doubleIndex]}';
+  }
 
-    // _madeString
+  void setMade() {
     if (madeValue == (contractValue + 6))
       _madeString = '=';
     else {
@@ -277,14 +289,9 @@ class Calculator {
           ? '${madeValue - (contractValue + 6)}'
           : '+' + '${madeValue - (contractValue + 6)}';
     }
+  }
 
-    // _vulnerableString
-    _vulnerableString = '${vulnerable[vulnerableIndex]}';
-
-    // _declarerString
-    _declarerString = '${declarer[declarerIndex]}';
-
-    // isPenalty isGame
+  void setGame() {
     if (madeValue < (contractValue + 6)) {
       _isPenalty = true;
       _isGame = false;
@@ -312,7 +319,7 @@ class Calculator {
         } else {
           _isGame = false;
         }
-      } else if (!_isRedouble && !_isDouble ){
+      } else if (!_isRedouble && !_isDouble) {
         if (12 < _biddingWeight) {
           _isGame = true;
         } else {
@@ -320,6 +327,16 @@ class Calculator {
         }
       }
     }
+  }
+
+  void combineSettings(int board) {
+    setDeclarer();
+    setContract();
+    setTrump();
+    setVul(board);
+    setResultContract();
+    setMade();
+    setGame();
   }
 
   void calculating() {
@@ -422,9 +439,9 @@ class Calculator {
     }
   }
 
-  void scoring() {
+  void scoring(int board) {
     resetVariable();
-    settings();
+    combineSettings(board);
     calculating();
 
     _totalScore = _contractPoint +
@@ -433,11 +450,11 @@ class Calculator {
         _overtrickPoint -
         _underTrickPenalty;
 
-    print('');
-    print('declarer: $declarerStrings');
-    print('contract: $resultContracts');
-    print('vulnerable: $vulnerableStrings');
-    print('made: $madeStrings');
-    print('total score: $totalScores');
+    // print('');
+    // print('declarer: $declarerStrings');
+    // print('contract: $resultContracts');
+    // print('vulnerable: $vulnerableStrings');
+    // print('made: $madeStrings');
+    // print('total score: $totalScores');
   }
 }
