@@ -18,9 +18,6 @@ class _ConfirmTableScreenState extends State<ConfirmTableScreen> {
     setState(() {
       _index = _index >= (totalRound - 1) ? _index : _index + 1;
     });
-    // if (_index == (totalRound)) {
-    //   Navigator.of(context).pop();
-    // }
   }
 
   @override
@@ -30,23 +27,28 @@ class _ConfirmTableScreenState extends State<ConfirmTableScreen> {
 
     final tableId = routeArgs['id'];
     final tableNumber = routeArgs['number'];
-    final tableList = DUMMY_COMPETITION.where((comp) {
-      return comp.table.contains(tableId);
+
+    ////ดึงค่าจาก Round ใน Database
+    final tableList = dummyRound.where((comp) {
+      return comp.table_NO.contains(tableNumber);
     }).toList();
+    //print(tableList);
     final int totalRound = tableList.length;
 
-    final String compId = tableList[_index].competitionID;
-    final String compTable = tableList[_index].table;
-    final int compRound = tableList[_index].round;
-    final List compBoardList = tableList[_index].board;
-    final String teamNSid = tableList[_index].teamNS;
-    final String teamEWid = tableList[_index].teamEW;
+    final String compId = tableList[_index].roundID;
+    final String compTable = tableList[_index].table_NO;
+    final int compRound = tableList[_index].round_NO;
+    final List compBoardList = tableList[_index].board_NO;
+    final String teamNS = tableList[_index].team_NS;
+    final String teamEW = tableList[_index].team_EW;
 
+    ////Encoder สำหรับส่งค่าผ่านไปอีกหน้า ต้องการ Table.table_NO
     final currentTable =
-        DUMMY_TABLE.firstWhere((table) => table.id == compTable);
+        dummyTable.firstWhere((table) => table.table_NO == compTable);
     final String boardListString = compBoardList.join(', ');
     final String dataString =
-        currentTable.number.toString() + ', ' + compRound.toString();
+        currentTable.table_NO + ', ' + compRound.toString();
+    ////Encoder
 
     void tableDetails(BuildContext ctx) {
       Navigator.of(ctx).pushNamed(
@@ -62,18 +64,18 @@ class _ConfirmTableScreenState extends State<ConfirmTableScreen> {
       appBar: AppBar(
         title: Text('Table ' + tableNumber),
       ),
-      body: TableDetailDisplay(
+      body: tableList != [] ? TableDetailDisplay(
         id: compId,
         table: compTable,
         round: compRound,
         board: compBoardList,
-        teamNS: teamNSid,
-        teamEW: teamEWid,
-      ),
+        teamNS: teamNS,
+        teamEW: teamEW,
+      ) : null,
 
-      // ListView.builder(
+      // body: ListView.builder(
       //   itemBuilder: (ctx, index) {
-      //     return TableDisplay(
+      //     return TableDetailDisplay(
       //       id: tableList[index].competitionID,
       //       table: tableList[index].table,
       //       round: tableList[index].round,

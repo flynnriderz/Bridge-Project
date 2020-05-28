@@ -2,22 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 class Rounds{
-  final String competitionID;
-  final int round;
-  final String table;
-  final List board;
-  final String teamNS;
-  final String teamEW;
-  // int teamNSScore;
-  // int teamEWScore;
+  final String roundID;
+  final int round_NO;
+  final String table_NO;
+  final List board_NO;
+  final String team_NS;
+  final String team_EW;
+  // int declarer;
+  // int score;
 
-  const Rounds({
-    @required this.competitionID,
-    @required this.round,
-    @required this.table,
-    @required this.board,
-    @required this.teamNS,
-    @required this.teamEW,
+  Rounds({
+    @required this.roundID,
+    @required this.round_NO,
+    @required this.table_NO,
+    @required this.board_NO,
+    @required this.team_NS,
+    @required this.team_EW,
   });
 
   // int get teamNSScores{

@@ -21,11 +21,9 @@ class TableDetailDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final pairIdNS = teamNS;
-    final selectedNS = DUMMY_PAIR.firstWhere((pair) => pair.pairID == pairIdNS);
-
-    final pairIdEW = teamEW;
-    final selectedEW = DUMMY_PAIR.firstWhere((pair) => pair.pairID == pairIdEW);
+    ////ดึงค่าตาก Competitor ใน Database มาเช็คว่าตรงกันหรือไม่
+    final selectedNS = dummyPair.firstWhere((pair) => pair.team_NO == teamNS);
+    final selectedEW = dummyPair.firstWhere((pair) => pair.team_NO == teamEW);
 
     final double headerFontSize = 18;
     final double teamfontSize = 30;
@@ -116,7 +114,7 @@ class TableDetailDisplay extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        selectedNS.player1 == null
+                        selectedNS.player1 == ''
                             ? '-'
                             : '${selectedNS.player1}',
                         style: TextStyle(
@@ -125,7 +123,7 @@ class TableDetailDisplay extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        selectedNS.player2 == null
+                        selectedNS.player2 == ''
                             ? '-'
                             : '${selectedNS.player2}',
                         style: TextStyle(
@@ -166,7 +164,7 @@ class TableDetailDisplay extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        selectedEW.player1 == null
+                        selectedEW.player1 == ''
                             ? '-'
                             : '${selectedEW.player1}',
                         style: TextStyle(
@@ -175,7 +173,7 @@ class TableDetailDisplay extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        selectedEW.player2 == null
+                        selectedEW.player2 == ''
                             ? '-'
                             : '${selectedEW.player2}',
                         style: TextStyle(
@@ -191,7 +189,6 @@ class TableDetailDisplay extends StatelessWidget {
           ),
         ],
       ),
-      
     );
   }
 }

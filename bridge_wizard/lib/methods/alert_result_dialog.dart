@@ -7,11 +7,11 @@ Future<bool> asyncConfirmDialog(
     BuildContext context, Calculator recentCalculator) async {
   return showDialog<bool>(
     context: context,
-    barrierDismissible: false, // user must tap button for close dialog!
+    barrierDismissible: false, 
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(
-          'Need A Comfimation From ' + recentCalculator.nonDeclarers,
+          'Need A Comfimation From ' + recentCalculator.nonDeclarerSide,
           textAlign: TextAlign.center,
         ),
         content: ResultDisplay(recentCalculator),

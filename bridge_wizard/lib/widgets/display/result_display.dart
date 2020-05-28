@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import '../../models/round.dart';
 import '../../methods/calculator.dart';
 
 class ResultDisplay extends StatelessWidget {
@@ -165,8 +164,8 @@ class ResultDisplay extends StatelessWidget {
                       Text(
                         'for ' +
                             (recentCalculator.totalScores < 0
-                                ? recentCalculator.nonDeclarers
-                                : recentCalculator.declarers),
+                                ? recentCalculator.nonDeclarerSide
+                                : recentCalculator.declarerSide),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: font - 4,

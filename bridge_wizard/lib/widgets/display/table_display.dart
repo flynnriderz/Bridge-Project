@@ -4,7 +4,7 @@ import '../../screens/confirm_tables_screen.dart';
 
 class TableDisplay extends StatelessWidget {
   final String id;
-  final int number;
+  final String number;
 
   TableDisplay(this.id, this.number);
 
@@ -13,7 +13,7 @@ class TableDisplay extends StatelessWidget {
       ConfirmTableScreen.routeName,
       arguments: {
         'id': id,
-        'number': number.toString(),
+        'number': number,
       },
     );
   }

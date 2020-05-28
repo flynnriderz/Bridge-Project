@@ -1,4 +1,3 @@
-
 class Calculator {
   int declarerIndex;
   int contractValue;
@@ -13,29 +12,31 @@ class Calculator {
   int _overtrickPoint = 0;
   int _slamBonus = 0;
   int _doubleBonus = 0;
-  int _underTrickPenalty = 0; 
+  int _underTrickPenalty = 0;
 
   String _resultContract = '';
   String _madeString = '';
+  String _doubleString = '';
+  String _trumpString = '';
   String _vulnerableString = '';
   String _declarerString = '';
-  String _declarer = '';
-  String _nonDeclarer = '';
-  int _totalScore = 0; 
+  String _declarerSideString = '';
+  String _nonDeclarerSideString = '';
+  int _totalScore = 0;
 
   bool _isDouble = false;
-  bool _isRedouble = false; 
+  bool _isRedouble = false;
 
   bool _isGame = false;
   bool _isSlam = false;
-  bool _isGrandSlam = false; 
+  bool _isGrandSlam = false;
   bool _isMinor = false;
-  bool _isMajor = false; 
-  bool _isVulnerable = false; 
-  bool _isPenalty = false; 
+  bool _isMajor = false;
+  bool _isVulnerable = false;
+  bool _isPenalty = false;
 
   int _level = 0;
-  int _biddingWeight = 0; 
+  int _biddingWeight = 0;
 
   List declarer = ['N', 'E', 'S', 'W'];
   List doubled = ['', 'x', 'xx'];
@@ -169,6 +170,17 @@ class Calculator {
     return _madeString;
   }
 
+  // _doubleString;
+  String get doubleStrings {
+    return _doubleString;
+  }
+
+  // _trumpString;
+  String get trumpStrings {
+    return _trumpString;
+  }
+  
+
   // _vulnerableString;
   String get vulnerableStrings {
     return _vulnerableString;
@@ -180,15 +192,16 @@ class Calculator {
   }
 
   // _nonDeclarer;
-  String get declarers {
-    return _declarer;
+  String get declarerSide {
+    return _declarerSideString;
   }
 
   // _nonDeclarer;
-  String get nonDeclarers {
-    return _nonDeclarer;
+  String get nonDeclarerSide {
+    return _nonDeclarerSideString;
   }
 
+  //rolling number
   int adjustRotate(int rotate) {
     if (rotate > 16)
       return adjustRotate(rotate - 16);
@@ -203,8 +216,12 @@ class Calculator {
     _totalScore = 0;
     _resultContract = '';
     _madeString = '';
+    _doubleString = '';
+    _trumpString = '';
     _vulnerableString = '';
     _declarerString = '';
+    _declarerSideString = '';
+    _nonDeclarerSideString = '';
 
     _isDouble = false;
     _isRedouble = false;
@@ -226,8 +243,8 @@ class Calculator {
 
   void setDeclarer() {
     _declarerString = '${declarer[declarerIndex]}';
-    _declarer = declarerIndex % 2 == 0 ? 'North - South' : 'East - West' ;
-    _nonDeclarer = declarerIndex % 2 == 0 ? 'East - West' : 'North - South' ;
+    _declarerSideString = declarerIndex % 2 == 0 ? 'North - South' : 'East - West';
+    _nonDeclarerSideString = declarerIndex % 2 == 0 ? 'East - West' : 'North - South';
   }
 
   void setContract() {
@@ -244,6 +261,7 @@ class Calculator {
   }
 
   void setTrump() {
+    _trumpString = trump[trumpIndexes];
     if (trumpIndex == 0 || trumpIndex == 1) {
       _isMinor = true;
       _isMajor = false;
@@ -257,22 +275,26 @@ class Calculator {
   }
 
   void setDouble() {
-    if (doubleIndex == 1) {
+    if (doubleIndex == 0) {
       _isDouble = false;
       _isRedouble = false;
+      _doubleString = 'Non-Double';
     } else if (doubleIndex == 1) {
       _isDouble = true;
       _isRedouble = false;
+      _doubleString = 'Doubled';
     } else if (doubleIndex == 2) {
       _isDouble = false;
       _isRedouble = true;
+      _doubleString = 'Redoubled';
     }
   }
 
   void setVul(int currentBoard) {
     _vulnerableIndex = declarerIndex % 2 == 0 ? 0 : 1;
     _isVulnerable = _vulnerableIndex == 0 ? false : true;
-    _rollboard = adjustRotate(((adjustRotate(currentBoard) - 1) ~/ 4) + ((adjustRotate(currentBoard) - 1) % 4));
+    _rollboard = adjustRotate(((adjustRotate(currentBoard) - 1) ~/ 4) +
+        ((adjustRotate(currentBoard) - 1) % 4));
     _vulnerableString = '${vulnerable[_rollboard][_vulnerableIndex]}';
   }
 
@@ -332,6 +354,7 @@ class Calculator {
   void combineSettings(int board) {
     setDeclarer();
     setContract();
+    setDouble();
     setTrump();
     setVul(board);
     setResultContract();
@@ -357,7 +380,8 @@ class Calculator {
         } else if (_isRedouble) {
           _underTrickPenalty = 400 + 600 * (contractValue + 6 - madeValue - 1);
         }
-      } //Penalty
+      } 
+      //Penalty
     } else {
       if (_isGame) {
         if (_isVulnerable) {
@@ -367,12 +391,14 @@ class Calculator {
         }
       } else {
         _contractPoint = 50;
-      } //contract point
+      } 
+      //contract point
       if (_isDouble) {
         _doubleBonus = 50;
       } else if (_isRedouble) {
         _doubleBonus = 100;
-      } //double Bonus
+      } 
+      //double Bonus
       if (_isSlam) {
         if (_isVulnerable) {
           _slamBonus = 750;
@@ -385,7 +411,8 @@ class Calculator {
         } else {
           _slamBonus = 1000;
         }
-      } //slam Bonus
+      }
+      //slam Bonus
       if (_isMinor) {
         if (!_isDouble && !_isRedouble) {
           _contractPoint += 20 * (contractValue);
@@ -410,7 +437,8 @@ class Calculator {
         } else if (_isRedouble) {
           _contractPoint += 160 + 120 * (contractValue - 1);
         }
-      } //contract bonus
+      } 
+      //contract bonus
       if (!_isVulnerable) {
         if (!_isDouble && !_isRedouble) {
           if (_isMinor) {
@@ -435,7 +463,8 @@ class Calculator {
         } else if (_isRedouble) {
           _overtrickPoint = 400 * (madeValue - contractValue - 6);
         }
-      } //over Trick Point
+      } 
+      //over Trick Point
     }
   }
 

@@ -12,8 +12,11 @@ class MainMenuScreen extends StatelessWidget {
     }
 
     final enteredKey = _keyController.text;
+    
+    ////ตรงนี้เอา key เช็คว่าตรงกับ tournament หรือ section ไหน////
+    print('key: ' + enteredKey);
 
-    print(enteredKey);
+
     Navigator.of(context).pushNamed(
       TablesScreen.routeName,
     );

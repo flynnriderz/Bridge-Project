@@ -14,11 +14,11 @@ class TablesScreen extends StatelessWidget {
       ),
       body: GridView(
         padding: const EdgeInsets.all(25),
-        children: DUMMY_TABLE
+        children: dummyTable
             .map(
               (catData) => TableDisplay(
-                    catData.id,
-                    catData.number,
+                    catData.key,
+                    catData.table_NO,
                   ),
             )
             .toList(),

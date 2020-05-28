@@ -39,8 +39,10 @@ class _CalculatingScreenState extends State<CalculatingScreen> {
     final routeArgs =
         ModalRoute.of(context).settings.arguments as Map<String, String>;
 
+    //// Decoder จากหน้าก่อน
     final boardListString = routeArgs['board'].split(', ');
     final dataString = routeArgs['data'].split(', ');
+    //// Decoder จากหน้าก่อน
 
     final boardLength = boardListString.length;
     final currentTable = dataString[0];
@@ -81,20 +83,30 @@ class _CalculatingScreenState extends State<CalculatingScreen> {
           onPressed: () async {
             cal.scoring(int.parse(currentRound));
             action = await asyncConfirmDialog(context, cal);
-            int declarerScore = cal.totalScores;
+            String declarerScore = cal.totalScores.toString();
+            String declarer = cal.declarerSide;
+            String doubledString = cal.doubleStrings;
+            String trumpString = cal.trumpStrings;
+            String vulString = cal.vulnerableStrings;
             if (action) {
-              // ***** for sent data to database *****
+              //// ส่งข้อมูลนี้ไปยัง database แทนการ print
               print('Table: ' +
-                  currentTable +
+                  currentTable + //Table_NO
                   ', Round: ' +
-                  currentRound +
+                  currentRound + //Round_NO
                   ', Board: ' +
-                  boardListString[_index] +
-                  ', (' +
-                  cal.declarers +
-                  ')\'s Score: $declarerScore, (' +
-                  cal.nonDeclarers +
-                  ')\'s Score: ${declarerScore * -1}, ');
+                  boardListString[_index] + //Board_NO
+                  ', Declarer: ' +
+                  declarer); //declarer
+              print('Score: ' +
+                      declarerScore + //score
+                      ', Double: ' +
+                      doubledString + //double
+                      ', Trump: ' +
+                      trumpString + //double
+                      ', Vulnerable: ' +
+                      vulString //double
+                  );
               _indexIncrese(boardLength);
             }
           }),
