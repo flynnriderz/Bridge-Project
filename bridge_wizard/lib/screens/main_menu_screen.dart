@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter_complete_guide/models/pair.dart';
+
 import '../dummy_data/round_dummy_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,26 @@ class MainMenuScreen extends StatelessWidget {
     
     final enteredKey = _keyController.text;
     dummyTable=[];
+    dummyPair=[];
     List<DocumentSnapshot> snapshots;
+    Future readCompetitor(String section) async{
+      Firestore.instance.document(section).collection("Competitor").orderBy("team_NO",descending: false).snapshots().listen((data) async {
+        snapshots = data.documents;
+        for(var snapshot in snapshots){
+             dummyPair.add(Pairs(
+                //collection
+                pin: snapshot.data['pin'],
+                team_NO: snapshot.data['team_NO'].toString(),
+                player1: snapshot.data['player1'],
+                player2: snapshot.data['player2'],
+              ),);
+              print(snapshot.data['team_NO']);
+        }
+        Navigator.of(context).pushNamed(
+            TablesScreen.routeName,
+          );
+      });
+    }
     Future readTable(String section) async{
       Firestore.instance.document(section).collection("Table").orderBy("table_NO",descending: false).snapshots().listen((data) async {
         snapshots = data.documents;
@@ -34,9 +55,7 @@ class MainMenuScreen extends StatelessWidget {
               ),);
               print(snapshot.data['key']);
         }
-        Navigator.of(context).pushNamed(
-            TablesScreen.routeName,
-          );
+        readCompetitor(section);
       });
     }
     Future readFirestore(String key) async{
