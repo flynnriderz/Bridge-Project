@@ -73,14 +73,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton(
-        elevation: 1.5,
-        onPressed: () => Navigator.of(context).pushNamed('/new-entry'),
-        tooltip: 'Add Team',
-        child: Icon(Icons.add),
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-      ),
     );
   }
 }

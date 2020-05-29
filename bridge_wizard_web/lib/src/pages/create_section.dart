@@ -16,13 +16,14 @@ class CreateSection extends StatefulWidget {
  @override    
  _CreateSection createState() => _CreateSection();    
 }    
-     
+String sectionkey="";
 class _CreateSection extends State<CreateSection> {    
  bool autoValidate = true;    
  bool readOnly = false;    
  bool showSegmentedControl = true;    
  final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();   
      
+
  @override    
  Widget build(BuildContext context) {    
    return Scaffold(    
@@ -126,7 +127,7 @@ class _CreateSection extends State<CreateSection> {
                         board : section[5],
                         board_round : section[6],
                         movement : section[7],
-                        key : rng.nextInt(9999).toString(),
+                        key : sectionkey=(rng.nextInt(9999).toString()),
                         pin : rng.nextInt(9999).toString(),
                         section_name : section[2],
                         table : section[4],
@@ -233,6 +234,12 @@ void printCompetition(List competition) {
 }
 
 void _addNewMatching(List board, List competition, int totalTable,DocumentReference docRef) async {
+  Firestore.instance
+                                .collection('Director')
+                                .add(KeyEntry(
+                                key : sectionkey,
+                                table : docRef,
+    ).toMap());
   int totalRound = board.length;
   //int currentId = 0;
 
@@ -313,6 +320,7 @@ void _addNewMatching(List board, List competition, int totalTable,DocumentRefere
                                 .document(docRef.documentID)
                                 .collection("Key")
                                 .add(regkey);
+                                
     for (var j = 0; j < totalRound; j++) {
       print(
           'Table:${i+1}\tRound: ${j+1}\tBoard: ${board[(i+j)%totalRound]}\t\tNS: ${(i+j)%totalRound+1}\tEW: ${competition[i][(i+j)%totalRound][1] + totalTable}'); //correct

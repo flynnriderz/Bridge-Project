@@ -17,10 +17,10 @@ class PopUpMenu extends StatelessWidget {
       elevation: 2,
       itemBuilder: (context) {
         return [
-          PopupMenuItem(
-            value: Action.delete,
-            child: Text('Delete'),
-          ),
+          // PopupMenuItem(
+          //   value: Action.delete,
+          //   child: Text('Delete'),
+          // ),
           PopupMenuItem(
             value: Action.edit,
             child: Text('Edit'),
@@ -29,20 +29,20 @@ class PopUpMenu extends StatelessWidget {
       },
       onSelected: (action) {
         switch (action) {
-          case Action.delete:
-            _showDeleteDialog(context, onDelete: () {
-              // TODO: Answer 5 to delete a document
-              Firestore.instance
-                  .collection("Tournament")
-                  .document(tournamentID)
-                  .collection("Section")
-                  .document(sectionID)
-                  .collection("Competitor")
-                  .document(diaryEntry.documentId)
-                  .delete();
-               Navigator.of(context, rootNavigator: true).pop();
-            });
-            break;
+          // case Action.delete:
+          //   _showDeleteDialog(context, onDelete: () {
+          //     // TODO: Answer 5 to delete a document
+          //     Firestore.instance
+          //         .collection("Tournament")
+          //         .document(tournamentID)
+          //         .collection("Section")
+          //         .document(sectionID)
+          //         .collection("Competitor")
+          //         .document(diaryEntry.documentId)
+          //         .delete();
+          //      Navigator.of(context, rootNavigator: true).pop();
+          //   });
+          //   break;
           case Action.edit:
             Navigator.of(context).push(
               MaterialPageRoute(
