@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import '../../methods/calculator.dart';
 
 class DoubleEditor extends StatefulWidget {
+  final Calculator recentCalculator;
+  DoubleEditor(this.recentCalculator);
+
   @override
   _DoubleEditorState createState() => _DoubleEditorState();
 }
 
 class _DoubleEditorState extends State<DoubleEditor> {
-  List doubled = ['Undouble', 'Double', 'Redouble'];
+  List _doubled = ['Undouble', 'Double', 'Redouble'];
   int _index = 0;
 
   void _indexIncrese() {
     setState(() {
       _index += 1;
+      widget.recentCalculator.doubleIndexes = _index;
     });
     
   }
@@ -19,8 +24,13 @@ class _DoubleEditorState extends State<DoubleEditor> {
   void _indexDecrese() {
     setState(() {
       _index -= 1;
+      widget.recentCalculator.doubleIndexes = _index;
     });
     
+  }
+
+  int get thisIndex {
+    return _index;
   }
 
   @override
@@ -35,7 +45,7 @@ class _DoubleEditorState extends State<DoubleEditor> {
             child: Card(
               child: Center(
                 child: const Text(
-                  'doubled',
+                  'Doubled',
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black87,
@@ -56,7 +66,7 @@ class _DoubleEditorState extends State<DoubleEditor> {
                     onPressed: _index <= 0 ? null : _indexDecrese,
                   ),
                   title: Text(
-                    '${doubled[_index]}',
+                    '${_doubled[_index]}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 21,

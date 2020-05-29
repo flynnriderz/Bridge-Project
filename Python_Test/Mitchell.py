@@ -1,6 +1,6 @@
 #set up
-totalTable = 12     #input 
-totalBoard = 24     #input
+totalTable = 8     #input 
+totalBoard = 16     #input
 
 boardPerRound = int(totalBoard/totalTable)
 totalPlayingBoard = totalTable*boardPerRound
@@ -38,13 +38,10 @@ NSPair = 1
 EWPair = 2
 for i in range(totalTable):
     compPerRound = []           #empty a list
-    
-    NSPair -= 1
-    EWPair -= 2
 
     for j in range(totalTable):
-        NSPair += 1
-        EWPair += 1
+        NSPair = 1 + j - i
+        EWPair = 1 + j - 2*i
         compPerRound.append([adjust(NSPair), adjust(EWPair), boardPlay[j]]) #create an object
 
     if totalTable % 2 == 0 and i == totalTable / 2: # skip one round if total round is even

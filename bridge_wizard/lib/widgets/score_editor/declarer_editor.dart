@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import '../../methods/calculator.dart';
 
 class DeclarerEditor extends StatefulWidget {
+  final Calculator recentCalculator;
+  DeclarerEditor(this.recentCalculator);
+
   @override
   _DeclarerEditorState createState() => _DeclarerEditorState();
 }
 
 class _DeclarerEditorState extends State<DeclarerEditor> {
-  List _declarer = ['N', 'E', 'S', 'W'];
+  List _declarer = ['North', 'East', 'South', 'West'];
   int _index = 0;
 
   void _indexIncrese() {
     setState(() {
       _index += 1;
+      widget.recentCalculator.declarerIndexes = _index;
     });
     
   }
@@ -19,6 +24,7 @@ class _DeclarerEditorState extends State<DeclarerEditor> {
   void _indexDecrese() {
     setState(() {
       _index -= 1;
+      widget.recentCalculator.declarerIndexes = _index;
     });
     
   }
@@ -35,7 +41,7 @@ class _DeclarerEditorState extends State<DeclarerEditor> {
             child: Card(
               child: Center(
                 child: const Text(
-                  'declarer',
+                  'Declarer',
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black87,
