@@ -3,55 +3,6 @@ import '../models/pair.dart';
 import '../models/round.dart';
 
 var dummyTable = [
-  Tables(
-    //collection
-    round: [],
-    //field
-    key: 't01',
-    table_NO: '1',
-  ),
-  Tables(
-    //collection
-    round: [],
-    //field
-    key: 't02',
-    table_NO: '2',
-  ),
-  Tables(
-   //collection
-    round: [],
-    //field
-    key: 't03',
-    table_NO: '3',
-  ),
-  Tables(
-    //collection
-    round: [],
-    //field
-    key: 't04',
-    table_NO: '4',
-  ),
-  Tables(
-    //collection
-    round: [],
-    //field
-    key: 't05',
-    table_NO: '5',
-  ),
-  Tables(
-    //collection
-    round: [],
-    //field
-    key: 't06',
-    table_NO: '6',
-  ),
-  Tables(
-    //collection
-    round: [],
-    //field
-    key: 't07',
-    table_NO: '7',
-  ),
 ];
 
 var dummyPair = [

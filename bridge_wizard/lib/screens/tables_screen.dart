@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../dummy_data/round_dummy_data.dart';
 import '../widgets/display/table_display.dart';
+
 
 class TablesScreen extends StatelessWidget {
   static const routeName = '/tables';
@@ -14,7 +16,9 @@ class TablesScreen extends StatelessWidget {
       ),
       body: GridView(
         padding: const EdgeInsets.all(25),
-        children: dummyTable
+        children: 
+        
+        dummyTable
             .map(
               (catData) => TableDisplay(
                     catData.key,

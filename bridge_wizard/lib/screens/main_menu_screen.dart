@@ -1,10 +1,12 @@
 import 'dart:async';
 
-
+import '../dummy_data/round_dummy_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../screens/tables_screen.dart';
+import '../models/table.dart';
 
+String section = "";
 class MainMenuScreen extends StatelessWidget {
   final _keyController = TextEditingController();
 
@@ -16,23 +18,40 @@ class MainMenuScreen extends StatelessWidget {
     }
     
     final enteredKey = _keyController.text;
-    
+    dummyTable=[];
     List<DocumentSnapshot> snapshots;
-
+    Future readTable(String section) async{
+      Firestore.instance.document(section).collection("Table").orderBy("table_NO",descending: false).snapshots().listen((data) async {
+        snapshots = data.documents;
+        for(var snapshot in snapshots){
+             dummyTable.add(Tables(
+                //collection
+                round: [],
+                //field
+                key: snapshot.data['key'],
+                table_NO: snapshot.data['table_NO'],
+                status: snapshot.data['status']
+              ),);
+              print(snapshot.data['key']);
+        }
+        Navigator.of(context).pushNamed(
+            TablesScreen.routeName,
+          );
+      });
+    }
     Future readFirestore(String key) async{
-      Firestore.instance.collection("Director").snapshots().listen((data) {
+      Firestore.instance.collection("Director").snapshots().listen((data) async {
         snapshots = data.documents;
         for(var snapshot in snapshots){
           if(snapshot.data['key']==key){
             print(snapshot.data['table_ref'].path);
-            
-            Navigator.of(context).pushNamed(
-            TablesScreen.routeName,
-          );
+            section=snapshot.data['table_ref'].path;
+             readTable(section);
           }
         }
       });
     }
+    
     ////ตรงนี้เอา key เช็คว่าตรงกับ tournament หรือ section ไหน////
     readFirestore(enteredKey);
     print('key: ' + enteredKey);
