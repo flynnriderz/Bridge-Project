@@ -12,6 +12,7 @@ class CreateTournament extends StatefulWidget {
 }     
       
 class _CreateTournament extends State<CreateTournament> {     
+  
  var data;     
  bool autoValidate = true;     
  bool readOnly = false;     

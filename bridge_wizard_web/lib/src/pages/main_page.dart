@@ -1,8 +1,5 @@
 import 'dart:html';
 
-
-import 'package:bridge_wizard_web/src/data/round_entry_model.dart';
-import 'package:bridge_wizard_web/src/data/score_entry_model.dart';
 import 'package:bridge_wizard_web/src/pages/create_section.dart';
 import 'package:bridge_wizard_web/src/data/tournament_entry_model.dart';
 import 'package:bridge_wizard_web/src/data/section_entry_model.dart';

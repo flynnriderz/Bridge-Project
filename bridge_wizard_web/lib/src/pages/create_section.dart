@@ -101,93 +101,6 @@ class _CreateSection extends State<CreateSection> {
                              value: movement, child: Text("$movement")))    
                          .toList(),    
                    ),
-
-                  //  FormBuilderDateTimePicker(    
-                  //    attribute: "date",    
-                  //    inputType: InputType.date,    
-                  //    validators: [FormBuilderValidators.required()],    
-                  //    format: DateFormat("dd-MM-yyyy"),    
-                  //    decoration: InputDecoration(labelText: "Date of section"),    
-                  //  ),    
-                   
-                  //  FormBuilderDropdown(    
-                  //    attribute: "gender",    
-                  //    decoration: InputDecoration(labelText: "Gender"),    
-                  //    // initialValue: 'Male',    
-                  //    hint: Text('Select Gender'),    
-                  //    validators: [FormBuilderValidators.required()],    
-                  //    items: ['Male', 'Female', 'Other']    
-                  //        .map((gender) => DropdownMenuItem(    
-                  //            value: gender, child: Text("$gender")))    
-                  //        .toList(),    
-                  //  ),    
-                  //  FormBuilderTextField(    
-                  //    attribute: "age",    
-                  //    decoration: InputDecoration(labelText: "Age"),    
-                  //    keyboardType: TextInputType.number,    
-                  //    validators: [    
-                  //      FormBuilderValidators.numeric(),    
-                  //      FormBuilderValidators.max(70),    
-                  //    ],    
-                  //  ),    
-                  //  FormBuilderSlider(    
-                  //    attribute: "slider",    
-                  //    validators: [FormBuilderValidators.min(6)],    
-                  //    min: 0.0,    
-                  //    max: 10.0,    
-                  //    initialValue: 1.0,    
-                  //    divisions: 20,    
-                  //    decoration: InputDecoration(    
-                  //        labelText: "Number of Family Members"),    
-                  //  ),    
-                  //  FormBuilderSegmentedControl(    
-                  //    decoration: InputDecoration(labelText: "Rating"),    
-                  //    attribute: "movie_rating",    
-                  //    options: List.generate(5, (i) => i + 1)    
-                  //        .map(    
-                  //            (number) => FormBuilderFieldOption(value: number))    
-                  //        .toList(),    
-                  //  ),    
-                  //  FormBuilderStepper(    
-                  //    decoration: InputDecoration(labelText: "Stepper"),    
-                  //    attribute: "stepper",    
-                  //    initialValue: 10,    
-                  //    step: 1,    
-                  //  ),    
-                  //  FormBuilderCheckboxList(    
-                  //    decoration:    
-                  //        InputDecoration(labelText: "Languages you know"),    
-                  //    attribute: "languages",    
-                  //    initialValue: ["English"],    
-                  //    options: [    
-                  //      FormBuilderFieldOption(value: "English"),    
-                  //      FormBuilderFieldOption(value: "Hindi"),    
-                  //      FormBuilderFieldOption(value: "Other")    
-                  //    ],    
-                  //  ),    
-                  //  FormBuilderSignaturePad(    
-                  //    decoration: InputDecoration(labelText: "Signature"),    
-                  //    attribute: "signature",    
-                  //    height: 100,    
-                  //  ),    
-                  //  FormBuilderRate(    
-                  //    decoration: InputDecoration(labelText: "Rate this site"),    
-                  //    attribute: "rate",    
-                  //    iconSize: 32.0,    
-                  //    initialValue: 1,    
-                  //    max: 5,    
-                  //  ),    
-                  //  FormBuilderCheckbox(    
-                  //    attribute: 'accept_terms',    
-                  //    label: Text(    
-                  //        "I have read and agree to the terms and conditions"),    
-                  //    validators: [    
-                  //      FormBuilderValidators.requiredTrue(    
-                  //        errorText:    
-                  //            "You must accept terms and conditions to continue",    
-                  //      ),    
-                  //    ],    
-                  //  ),    
                  ],    
                ),    
              ),    
@@ -416,7 +329,7 @@ void _addNewMatching(List board, List competition, int totalTable,DocumentRefere
                                     final table = RoundEntry(
                                   round_NO: (j+1).toString(),
                                   team_EW :(competition[i][(i+j)%totalRound][1] + totalTable).toString(),
-                                  board_NO: board[(i+j)%totalRound].toString(),
+                                  board_NO: board[(i+j)%totalRound],
                                   table_NO: (i+1).toString(),
                                   team_NS: ((i+j)%totalRound+1).toString(),
                                   declaler: "",

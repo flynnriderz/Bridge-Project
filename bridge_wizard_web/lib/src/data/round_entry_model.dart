@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RoundEntry {
   final String round_NO;
-  final String board_NO;
+  final List board_NO;
   final String table_NO;
   final String team_NS;
   final String team_EW;

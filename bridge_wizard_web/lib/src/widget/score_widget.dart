@@ -155,7 +155,7 @@ class ScoreWidget extends StatelessWidget {
                                       DataCell(Text(section.round_NO)),
                                       DataCell(Text(section.team_NS)),
                                       DataCell(Text(section.team_EW)),
-                                      DataCell(Text(section.board_NO)),
+                                      DataCell(Text(section.board_NO.toString())),
                                       DataCell(Text(section.declaler)),
                                       DataCell(Text(section.trump)),
                                       DataCell(Text(section.double_)),

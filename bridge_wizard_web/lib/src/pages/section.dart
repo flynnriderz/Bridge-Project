@@ -16,9 +16,10 @@ class _TabsNonScrollableDemo extends State<TabsNonScrollableDemo>{
 
   @override
   Widget build(BuildContext context) {
+    
     final _media = MediaQuery.of(context).size;
     List<String> tabs = [
-      'Detail','Score','Player list','Result'
+      'Detail','Score','Player list'
     ];
 
     return DefaultTabController(
@@ -41,7 +42,6 @@ class _TabsNonScrollableDemo extends State<TabsNonScrollableDemo>{
             DetailPage(),
             ScoreWidget(media: _media),
             PlayerDetail(),
-            ResultPage(),
           ],
         ),
       ),
