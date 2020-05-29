@@ -127,7 +127,7 @@ class _CreateSection extends State<CreateSection> {
                         board : section[5],
                         board_round : section[6],
                         movement : section[7],
-                        key : sectionkey=(rng.nextInt(9999).toString()),
+                        key : sectionkey=(rng.nextInt(999999).toString()),
                         pin : rng.nextInt(9999).toString(),
                         section_name : section[2],
                         table : section[4],
