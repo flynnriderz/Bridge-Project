@@ -1,3 +1,7 @@
+import 'dart:async';
+
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../screens/tables_screen.dart';
 
@@ -10,16 +14,28 @@ class MainMenuScreen extends StatelessWidget {
     if (_keyController.text.isEmpty) {
       return;
     }
-
+    
     final enteredKey = _keyController.text;
     
+    List<DocumentSnapshot> snapshots;
+
+    Future readFirestore(String key) async{
+      Firestore.instance.collection("Director").snapshots().listen((data) {
+        snapshots = data.documents;
+        for(var snapshot in snapshots){
+          if(snapshot.data['key']==key){
+            print(snapshot.data['table_ref'].path);
+            
+            Navigator.of(context).pushNamed(
+            TablesScreen.routeName,
+          );
+          }
+        }
+      });
+    }
     ////ตรงนี้เอา key เช็คว่าตรงกับ tournament หรือ section ไหน////
+    readFirestore(enteredKey);
     print('key: ' + enteredKey);
-
-
-    Navigator.of(context).pushNamed(
-      TablesScreen.routeName,
-    );
   }
 
   void _startSubmitKey(BuildContext context) {
