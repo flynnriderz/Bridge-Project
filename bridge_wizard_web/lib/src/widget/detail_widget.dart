@@ -1,7 +1,6 @@
-import 'package:bridge_wizard_web/src/data/section_entry_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:bridge_wizard_web/src/widget/sidebar_menu..dart';
+import 'package:bridge_wizard_web/src/widget/sidebar_menu.dart';
 import 'package:bridge_wizard_web/src/pages/main_page.dart';
 
 class DetailPage extends StatefulWidget {

@@ -1,26 +1,18 @@
 import 'dart:html';
 
 
-import 'package:bridge_wizard_web/src/widget/create_section.dart';
+import 'package:bridge_wizard_web/src/data/round_entry_model.dart';
+import 'package:bridge_wizard_web/src/data/score_entry_model.dart';
+import 'package:bridge_wizard_web/src/pages/create_section.dart';
 import 'package:bridge_wizard_web/src/data/tournament_entry_model.dart';
 import 'package:bridge_wizard_web/src/data/section_entry_model.dart';
-import 'package:firebase/firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bridge_wizard_web/src/commons/theme.dart';
-import 'package:bridge_wizard_web/src/model/menu.dart';
-import 'package:bridge_wizard_web/src/model/section.dart';
-import 'package:bridge_wizard_web/src/widget/card_tile.dart';
 import 'package:bridge_wizard_web/src/widget/chart_card_tile.dart';
-import 'package:bridge_wizard_web/src/widget/profile_Widget.dart';
-import 'package:bridge_wizard_web/src/widget/score_widget.dart';
-import 'package:bridge_wizard_web/src/widget/quick_contact.dart';
 import 'package:bridge_wizard_web/src/widget/responsive_widget.dart';
-import 'package:bridge_wizard_web/src/widget/score_widget.dart';
-import 'package:bridge_wizard_web/src/widget/sidebar_menu..dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:bridge_wizard_web/src/widget/section.dart';
-import 'package:firebase/firebase.dart' ;
+import 'package:bridge_wizard_web/src/widget/sidebar_menu.dart';
+import 'package:bridge_wizard_web/src/pages/section.dart';
 import 'package:cloud_firestore/cloud_firestore.dart' as db ;
 
 
@@ -134,7 +126,7 @@ class _MainPage extends State<MainPage>  {
                                                   cardColor: Colors.orange,
                                                   cardTitle: "Tournament  "+tournament.name,
                                                   subText: 'Director  '+tournament.director_name,
-                                                  icon: Icons.history,
+                                                  icon: Icons.accessibility_new,
                                                   typeText: "Location  "+tournament.location,
                                                 ),
                                               ],
@@ -181,7 +173,7 @@ class _MainPage extends State<MainPage>  {
                         return IntrinsicHeight(
                                 child: DataTable(
                                 sortAscending: true,
-                                sortColumnIndex: 0,
+                                
                                 columns: [
                                   
                                   DataColumn(
@@ -211,6 +203,8 @@ class _MainPage extends State<MainPage>  {
                                       DataCell(Text(section.section_name), showEditIcon: false,onTap: () {
                                         sectionname=section.section_name;
                               sectionID=section.documentId;
+                              
+                              
                               Navigator.push(context, MaterialPageRoute(
                                               builder: (context)=> TabsNonScrollableDemo()));
                             }),

@@ -1,13 +1,13 @@
-import 'package:bridge_wizard_web/src/data/round_entry_model.dart';
 import 'package:bridge_wizard_web/src/pages/main_page.dart';
 import 'package:bridge_wizard_web/src/widget/sidebar_menu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bridge_wizard_web/src/data/diary_entry_model.dart';
+import 'package:bridge_wizard_web/src/widget/competitor/diary_entry_page.dart';
 import 'package:bridge_wizard_web/src/widget/competitor/diary_card.dart';
 import 'package:provider/provider.dart';
 
-class ResultPage extends StatelessWidget {
+class PlayerDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
@@ -18,8 +18,8 @@ class ResultPage extends StatelessWidget {
         .document(tournamentID)
         .collection("Section")
         .document(sectionID)
-        .collection("Result")
-        .orderBy("rank")
+        .collection("Competitor")
+        .orderBy("team_NO")
         .snapshots()
         .map((snapshot) {
       return snapshot.documents.map((doc) => DiaryEntry.fromDoc(doc)).toList();
@@ -37,6 +37,7 @@ class ResultPage extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => MyHomePage(),
+          '/new-entry': (context) => DiaryEntryPage.add(),
         },
       ),
     );
@@ -75,31 +76,11 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         elevation: 1.5,
-        onPressed: () => 
-        _createResult(),
-        tooltip: 'Refresh',
-        child: Icon(Icons.refresh),
+        onPressed: () => Navigator.of(context).pushNamed('/new-entry'),
+        tooltip: 'Add Team',
+        child: Icon(Icons.add),
         backgroundColor: Theme.of(context).colorScheme.secondary,
       ),
     );
   }
 }
-_createResult()async{
-  for (var i = 1; i <= 5; i++) {
-    RoundEntry round;
-    Firestore.instance
-        .collection("Tournament")
-        .document(tournamentID)
-        .collection("Section")
-        .document(sectionID)
-        .collection("Score")
-        .where('board_NO', isEqualTo: "["+i.toString()+"]")
-        .snapshots().forEach((board) {
-          for (var table in board.documents.toList()) {
-            print(table["score"]);
-          }
-        });
-  }
-}
-var diaryEntry =
-    'People just dont understand how I am built and reason. There is so much that I want to explain. However, I cannot do that as I have the disability of talking cock. Someday they will understand that talking cock is great';
