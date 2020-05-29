@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bridge_wizard_web/src/widget/responsive_widget.dart';
+import 'package:bridge_wizard_web/src/widget/sidebar_menu.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bridge_wizard_web/src/pages/main_page.dart';
 
 class ChartCardTile extends StatelessWidget {
   final Color cardColor;
@@ -44,7 +47,11 @@ class ChartCardTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Icon(icon, size: 30, color: Colors.white),
+                    Icon(
+                      
+                      icon, 
+                      size: 50, 
+                      color: Colors.white),
                     SizedBox(width: 20),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +74,15 @@ class ChartCardTile extends StatelessWidget {
                             style:
                                 TextStyle(fontSize: 12, color: Colors.white)),
                       ],
-                    )
+                    ),
+                    SizedBox(width: 500,),
+                                Center(child: IconButton(
+                                  icon: Icon(Icons.delete_forever),
+                                  tooltip: 'Delete tournament',
+                                  iconSize: 60,
+                                  onPressed: (){_asyncConfirmDialog(context);},
+
+                                ))
                   ],
                 ),
                 Spacer(),
@@ -87,3 +102,40 @@ class ChartCardTile extends StatelessWidget {
     );
   }
 }
+enum ConfirmAction { CANCEL, ACCEPT }
+
+Future<ConfirmAction> _asyncConfirmDialog(BuildContext context) async {
+  return showDialog<ConfirmAction>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Do you want to delete tournament?'),
+        content: const Text(
+            'This will delete all data in your tournament.'),
+        actions: <Widget>[
+          FlatButton(
+            child: const Text('CANCEL'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.CANCEL);
+            },
+          ),
+          FlatButton(
+            child: const Text('ACCEPT'),
+            onPressed: () {
+              Firestore.instance
+                  .collection("Tournament")
+                  .document(tournamentID)
+                  .delete();
+              Navigator.of(context).pop(ConfirmAction.ACCEPT);
+              Navigator.pop(context);
+                        Navigator.push(context, MaterialPageRoute(
+                                              builder: (context)=> MainPage()));
+            },
+          )
+        ],
+      );
+    },
+  );
+}
+  
