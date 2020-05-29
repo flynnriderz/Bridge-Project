@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_complete_guide/models/pair.dart';
+import 'package:flutter_complete_guide/models/round.dart';
 
 import '../dummy_data/round_dummy_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,7 +23,10 @@ class MainMenuScreen extends StatelessWidget {
     final enteredKey = _keyController.text;
     dummyTable=[];
     dummyPair=[];
+    dummyRound=[];
     List<DocumentSnapshot> snapshots;
+    
+    
     Future readCompetitor(String section) async{
       Firestore.instance.document(section).collection("Competitor").orderBy("team_NO",descending: false).snapshots().listen((data) async {
         snapshots = data.documents;
@@ -31,8 +35,8 @@ class MainMenuScreen extends StatelessWidget {
                 //collection
                 pin: snapshot.data['pin'],
                 team_NO: snapshot.data['team_NO'].toString(),
-                player1: snapshot.data['player1'],
-                player2: snapshot.data['player2'],
+                player1: snapshot.data['player1_name'],
+                player2: snapshot.data['player2_name'],
               ),);
               print(snapshot.data['team_NO']);
         }
@@ -62,9 +66,10 @@ class MainMenuScreen extends StatelessWidget {
       Firestore.instance.collection("Director").snapshots().listen((data) async {
         snapshots = data.documents;
         for(var snapshot in snapshots){
+          print("test"+snapshot.data.toString());
           if(snapshot.data['key']==key){
-            print(snapshot.data['table_ref'].path);
-            section=snapshot.data['table_ref'].path;
+            print(snapshot.data['table'].path);
+            section=snapshot.data['table'].path;
              readTable(section);
           }
         }

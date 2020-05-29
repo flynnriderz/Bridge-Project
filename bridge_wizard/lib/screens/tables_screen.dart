@@ -23,7 +23,7 @@ class TablesScreen extends StatelessWidget {
               (catData) => TableDisplay(
                     catData.key,
                     catData.table_NO,
-                  ),
+                  ), 
             )
             .toList(),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
